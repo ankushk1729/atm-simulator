@@ -3,27 +3,27 @@
 
 ## User account information  
 
-    - Account number
-    - Account holder name  
-    - DOB - Contact  
-    - Phone  
-    - E-mail  
-    - Account type 
-    - Saving (min Balance - 5000) 
-    - Current (min Balance - 10000) 
+- Account number
+- Account holder name  
+- DOB - Contact  
+- Phone  
+- E-mail  
+- Account type 
+- Saving (min Balance - 5000) 
+- Current (min Balance - 10000) 
 
 ## Account Opening by Admin  
 
-    - Admin can open account for user 
-    - Can define Type of account  
-    - Saving  
-    - Current  
+- Admin can open account for user 
+- Can define Type of account  
+- Saving  
+- Current  
 
  
 ## Account Opening by user  
 
-    - User can apply for account through screen 
-    - After Admin approve user account will active  
+- User can apply for account through screen 
+- After Admin approve user account will active  
 
  
 ## ATM Menu  
