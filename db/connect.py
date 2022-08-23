@@ -1,3 +1,4 @@
+from config.db import *
 from pony import orm
 
 
@@ -15,5 +16,5 @@ class Connect:
       else:
         Connect.__instance = self
         self.db = orm.Database()
-        self.db.bind(provider='sqlite',filename="pony_test.db", create_db = True) 
+        self.db.bind(provider = DB_PROVIDER,filename = DB_FILENAME, create_db = True) 
 
