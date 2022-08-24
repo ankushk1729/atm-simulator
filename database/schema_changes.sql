@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS users (
     FOREIGN KEY (modified_by) REFERENCES users(id)
     );
 
-CREATE TABLE IF NOT EXISTS role (
+CREATE TABLE IF NOT EXISTS user_role (
     id INT PRIMARY KEY,
     role_id INT NOT NULL,
     user_id INT NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS role (
     created_at TIMESTAMP,
 );
 
-CREATE TABLE IF NOT EXISTS users_role (
+CREATE TABLE IF NOT EXISTS role (
     id INT PRIMARY KEY,
     role_name VARCHAR(20) NOT NULL,
     created_at TIMESTAMP,

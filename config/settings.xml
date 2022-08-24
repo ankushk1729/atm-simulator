@@ -1,0 +1,6 @@
+<CONFIG>
+<DB_USER>root</DB_USER>
+<DB_PASSWORD>sqlpassword</DB_PASSWORD>
+<DB_HOST>localhost</DB_HOST>
+<DB_NAME>atm</DB_NAME>
+</CONFIG>
