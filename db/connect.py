@@ -1,5 +1,5 @@
+import mysql.connector
 from config.db import *
-from pony import orm
 
 
 class Connect:
@@ -8,13 +8,16 @@ class Connect:
    def getInstance():
       if Connect.__instance == None:
          Connect()
-      return Connect.__instance.db
+      return Connect.__instance.cnx
 
    def __init__(self):
       if Connect.__instance != None:
         raise Exception("Already instantialzed the connection")
       else:
         Connect.__instance = self
-        self.db = orm.Database()
-        self.db.bind(provider = DB_PROVIDER,filename = DB_FILENAME, create_db = True) 
+        self.cnx = mysql.connector.connect(user= DB_USER, password=DB_PASSWORD,host=DB_HOST,
+                              database=DB_NAME)
 
+
+
+connection_obj = Connect()

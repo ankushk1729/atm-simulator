@@ -1,2 +1,4 @@
-DB_PROVIDER = 'sqlite'
-DB_FILENAME = 'data.db'
+DB_USER = 'root'
+DB_PASSWORD = 'sqlpassword'
+DB_HOST = 'localhost'
+DB_NAME = 'atm'
