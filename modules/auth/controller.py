@@ -1,2 +1,7 @@
 class AuthController:
-    pass
+
+    def login():
+        pass
+
+    def signup():
+        pass
