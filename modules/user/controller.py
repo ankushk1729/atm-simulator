@@ -6,8 +6,10 @@ from prettytable import PrettyTable
 
 class UserController:
 
-    def __init__(self):
+    def __init__(self, user_id, user_aadhar):
         self.user_service = UserService()
+        self.user_id = user_id
+        self.user_aadhar = user_aadhar
     
     def create_user(self):
         auth_controller = AuthController()

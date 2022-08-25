@@ -19,9 +19,7 @@ class UserService:
 
 
         cursor.execute(query, param_list)
-
         queryList = list(cursor)
-    
         cursor.close()
 
         if len(queryList) < 1: return False

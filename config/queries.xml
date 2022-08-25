@@ -7,4 +7,6 @@
     <APPROVE_USER_BY_AADHAR>update users set isApproved = 1 where {} = {};</APPROVE_USER_BY_AADHAR>
     <SEARCH_USERS_BY_NAME>select full_name, email, phone from users where full_name like '{}%';</SEARCH_USERS_BY_NAME>
     <GET_USER_BY_AADHAR>select * from users where aadhar = {};</GET_USER_BY_AADHAR>
+    <SEARCH_USER_ROLE_ID_IN_MAPPING>select role_id from user_role where user_id = '{}';</SEARCH_USER_ROLE_ID_IN_MAPPING>
+    <GET_ROLE_FROM_ROLE_ID>select role_name from role where id = {};</GET_ROLE_FROM_ROLE_ID>
 </queries>
