@@ -10,6 +10,7 @@
 
 ## Pending remember
 - Add queries.xml root tree import to util function
+- Mask password
 
 ## User account information  
 

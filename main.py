@@ -2,8 +2,8 @@ from modules.auth.controller import AuthController
 from modules.user.controller import UserController
 from utils.authorize_permissions import authorize_permissions
 
-# auth = AuthController()
-# auth.handler()
+auth = AuthController()
+auth.handler()
 
 
 # user_controller = UserController()
@@ -14,4 +14,4 @@ from utils.authorize_permissions import authorize_permissions
 
 # user_controller.get_user_data(123)
 
-print(authorize_permissions('8894e75d-247c-11ed-86be-544810d578e2', 'admin'))
+# print(authorize_permissions('8894e75d-247c-11ed-86be-544810d578e2', 'admin'))

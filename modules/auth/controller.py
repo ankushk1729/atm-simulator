@@ -1,6 +1,9 @@
 from modules.auth.service import AuthService
+from modules.menu.admin import AdminMenu
+from modules.menu.user import UserMenu
 from modules.user.schema import Regex, SchemaError, user_signup_schema
 from modules.user.service import UserService
+from utils.authorize_permissions import authorize_permissions
 
 
 class AuthController:
@@ -39,9 +42,13 @@ class AuthController:
             password = input('Enter your password : ')
             user_info = auth_service.login(email, password)
             if  user_info :
-                print(user_info)
                 break
             else : print('Invalid credentials')
+
+        if authorize_permissions(user_info[0], 'admin'):
+            AdminMenu(user_info)
+        else :
+            UserMenu(user_info)
 
     def signup(self):
 
@@ -81,7 +88,6 @@ class AuthController:
         auth_service = AuthService()
 
         user_id = auth_service.signup(schema)
-        print('84', user_id)
 
         return (user_id, aadhar)
 
