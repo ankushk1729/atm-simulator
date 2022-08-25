@@ -1,11 +1,14 @@
 
 
-#19:02
+import xml.etree.ElementTree as ET
+
+tree = ET.parse('./config/queries.xml')
+
+root = tree.getroot()
 
 import hashlib
 import uuid
 
-from modules.user.service import UserService
 from utils.connect import connection_obj
 
 
@@ -30,21 +33,22 @@ class AuthService:
 
         unique_user_id = str(uuid.uuid1())
 
-        query = "insert into users(id, full_name, email, password, phone, aadhar, DOB) values((%s), (%s), (%s), (%s), (%s), (%s), (%s))"
+        create_user_query = root[0].text.format(unique_user_id, schema['full_name'], schema['email'], hashedPassword, schema['phone'], schema['aadhar'], schema['DOB'])
 
         cursor = self.cnx.cursor()
 
-        cursor.execute(query, [unique_user_id, schema['full_name'], schema['email'], hashedPassword, schema['phone'], schema['aadhar'], schema['DOB']])
+        try:
+            cursor.execute(create_user_query)
+            self.cnx.commit()
+        except:
+            return False
 
-        self.cnx.commit()
-        
-        get_role_id_query = "select id from role where role_name = 'user'"
 
-        cursor.execute(get_role_id_query)
+        cursor.execute(root[1].text)
 
         role_id = list(cursor)[0][0]
 
-        create_user_role_mapping_query = "insert into user_role(role_id, user_id) values('{}', '{}');".format(role_id, unique_user_id)
+        create_user_role_mapping_query = root[2].text.format(role_id, unique_user_id)
 
         cursor.execute(create_user_role_mapping_query)
 
@@ -54,7 +58,7 @@ class AuthService:
 
     def login(self, email, password):
         
-        search_user = "select * from users where email = '{}';".format(email)
+        search_user = root[3].text.format(email)
 
         cursor = self.cnx.cursor()
 

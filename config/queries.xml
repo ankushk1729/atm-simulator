@@ -1,0 +1,6 @@
+<queries>
+    <CREATE_NEW_USER>insert into users(id, full_name, email, password, phone, aadhar, DOB) values('{}', '{}', '{}', '{}', {}, {}, '{}')</CREATE_NEW_USER>
+    <GET_ROLE_ID>select id from role where role_name = 'user';</GET_ROLE_ID>
+    <CREATE_USER_ROLE_MAPPING>insert into user_role(role_id, user_id) values('{}', '{}');</CREATE_USER_ROLE_MAPPING>
+    <GET_USER_BY_EMAIL>select * from users where email = '{}';</GET_USER_BY_EMAIL>
+</queries>

@@ -41,3 +41,27 @@ CREATE TABLE IF NOT EXISTS approval_requests (
     FOREIGN KEY (user_aadhar) REFERENCES users(aadhar),
     FOREIGN KEY (approved_by) REFERENCES users(id),
 );
+
+CREATE TABLE IF NOT EXISTS account (
+    account_num VARCHAR(70) PRIMARY KEY,
+    balance INT DEFAULT 0,
+    account_type INT,
+    user_id VARCHAR(70),
+    FOREIGN KEY (account_type) REFERENCES account_type(id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    modified_by VARCHAR(70),
+    FOREIGN KEY (modified_by) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS account_type (
+    id INT PRIMARY KEY, 
+    name VARCHAR(20) DEFAULT 'savings',
+    max_withdrawal_amount INT DEFAULT 0,
+    min_balance INT DEFAULT 5000,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    modified_by VARCHAR(70),
+    FOREIGN KEY (modified_by) REFERENCES users(id)
+);
