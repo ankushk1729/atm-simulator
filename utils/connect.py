@@ -1,5 +1,10 @@
+import xml.etree.ElementTree as ET
+
 import mysql.connector
-from config.db import *
+
+tree = ET.parse('./config/settings.xml')
+
+root = tree.getroot()
 
 
 class Connect:
@@ -15,8 +20,9 @@ class Connect:
         raise Exception("Already instantialzed the connection")
       else:
         Connect.__instance = self
-        self.cnx = mysql.connector.connect(user= DB_USER, password=DB_PASSWORD,host=DB_HOST,
-                              database=DB_NAME)
+        #print(root[0].text, root[1].text, root[2].text, root[3].text)
+        self.cnx = mysql.connector.connect(user= "bhawana", password="mysqlpassword",host="localhost",
+                              database="atm")
 
 
 

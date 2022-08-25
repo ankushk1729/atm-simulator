@@ -1,0 +1,8 @@
+<config>
+<DB>
+<USER> root </USER>
+<PASSWORD>sqlpassword</PASSWORD>
+<HOST>localhost</HOST>
+<NAME>atm</NAME>
+ </DB>
+ </config>

@@ -1,3 +1,5 @@
-from modules.user.schema import func
+from modules.auth.controller import AuthController
 
-func()
+auth = AuthController()
+auth.handler()
+1
