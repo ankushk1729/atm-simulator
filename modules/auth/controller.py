@@ -1,5 +1,5 @@
 from modules.auth.service import AuthService
-from modules.user.schema import SchemaError, user_schema
+from modules.user.schema import Schema, SchemaError, user_schema
 from modules.user.service import UserService
 
 
@@ -41,27 +41,26 @@ class AuthController:
 
     def signup(self):
 
-        aadhar = int(input('Enter your aadhar number'))
         user_service  = UserService()
         is_user_exists = True
-        while not is_user_exists:
+        while is_user_exists:
+            aadhar = int(input('Enter your aadhar number : '))
             if user_service.check_user_exists(aadhar):
                 print('User with this aadhar already exists')
             else :
                 is_user_exists = False
 
-        full_name = input('Enter your full name')
-        email = input('Enter your email')
-        password = input('Enter your pasword')
-        phone = input('Enter your phone')
-        # DOB = input('Enter your DOB in format DD/MM/YY')
-
-        schema = {'full_name' : full_name, 'email' : email, 'phone': phone, 'aadhar': aadhar, 'password' : password}
-
-        while True:
+        is_user_schema_correct = False
+        while not is_user_schema_correct:
             try: 
+                full_name = input('Enter your full name :')
+                email = input('Enter your email : ')
+                password = input('Enter your password : ')
+                phone = int(input('Enter your phone : '))
+                DOB = input('Enter your DOB in format DD-MM-YY : ')
+                schema = {'full_name' : full_name, 'email' : email, 'phone': phone, 'aadhar': aadhar, 'password' : password, 'DOB': DOB}
                 user_schema.validate(schema)
-                break
+                is_user_schema_correct = True
             except SchemaError as error: 
                 print(str(error))
 

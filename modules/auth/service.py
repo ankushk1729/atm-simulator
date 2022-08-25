@@ -17,11 +17,12 @@ class AuthService:
         
         hashedPassword = self.encrypt_password(schema['password'])
 
-        query = "insert into users(full_name, email, password, phone, aadhar) values(%s, %s, %s, %s, %s)" 
+        query = "insert into users(full_name, email, password, phone, aadhar, DOB) values((%s), (%s), (%s), (%s), (%s), (%s))"
 
         cursor = self.cnx.cursor()
 
-        cursor.execute(query, (schema['full_name'], schema['email'], hashedPassword, schema['phone'], schema['aadhar']))
+        cursor.execute(query, [schema['full_name'], schema['email'], hashedPassword, schema['phone'], schema['aadhar'], schema['DOB']])
 
+        self.cnx.commit()
 
         cursor.close()

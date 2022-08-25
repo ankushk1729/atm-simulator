@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS users (
     full_name VARCHAR(20) NOT NULL, 
     password VARCHAR(100) NOT NULL,
     aadhar INT NOT NULL PRIMARY KEY,
+    DOB VARCHAR(20) NOT NULL,
     isApproved INT DEFAULT 0,
     phone INT NOT NULL, 
     email VARCHAR(30) NOT NULL,
