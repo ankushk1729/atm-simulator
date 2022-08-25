@@ -5,7 +5,6 @@ from utils.util import Util
 auth = AuthController()
 auth.handler()
 
-
 # user_controller = UserController()
 
 # user_controller.create_user()

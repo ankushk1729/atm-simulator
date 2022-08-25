@@ -34,15 +34,13 @@ class UserService:
 
         search_user_query = self.root[6].text.format(search_value)
         
-        cursor = self.cnx.cursor()
 
-        try:
-            cursor.execute(search_user_query)
-        except:
-            print('Unable to find the users')
-            return []
-
+        
+        cursor = self.util.execute_query(search_user_query)
+        cursor.close()
+    
         user_search_list = list(cursor)
+
 
         return user_search_list
 
@@ -50,19 +48,13 @@ class UserService:
 
         get_user_query = self.root[7].text.format(aadhar)
 
-        cursor = self.cnx.cursor()
-
-        try:
-            cursor.execute(get_user_query)
-        except:
-            print('Unable to find the user')
-            return None
-
+        cursor = self.util.execute_query(get_user_query)
         users_list = list(cursor)
         if len(users_list) < 1 : 
             return None
 
         user = users_list[0]
+        cursor.close()
         return user
 
     def get_all_users(self):

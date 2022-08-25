@@ -1,15 +1,14 @@
 
-from modules.auth.controller import AuthController
+from modules.auth.controller import *
 from modules.user.service import UserService
 from prettytable import PrettyTable
 
 
 class UserController:
 
-    def __init__(self, user_id, user_aadhar):
+    def __init__(self, user_info):
         self.user_service = UserService()
-        self.user_id = user_id
-        self.user_aadhar = user_aadhar
+        self.user_info = user_info
     
     def create_user(self):
         auth_controller = AuthController()
@@ -35,9 +34,11 @@ class UserController:
         print('\nHere are the matching results')
         print(user_search_table)
 
-    def get_user_data(self, aadhar):
+    def get_current_user_data(self):
 
-        user = self.user_service.get_user(aadhar)
+        print(self.user_info[3])
+
+        user = self.user_service.get_user(self.user_info[3])
 
         if user == None:
             print('No user found with given aadhar')
@@ -50,3 +51,5 @@ class UserController:
     def get_all_users(self):
         self.user_service.get_all_users()
 
+    def delete_user():
+        pass
