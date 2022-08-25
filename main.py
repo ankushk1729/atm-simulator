@@ -1,6 +1,6 @@
 from modules.auth.controller import AuthController
 from modules.user.controller import UserController
-from utils.authorize_permissions import authorize_permissions
+from utils.util import Util
 
 auth = AuthController()
 auth.handler()

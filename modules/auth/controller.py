@@ -1,12 +1,15 @@
 from modules.auth.service import AuthService
 from modules.menu.admin import AdminMenu
 from modules.menu.user import UserMenu
-from modules.user.schema import Regex, SchemaError, user_signup_schema
+from modules.user.schema import SchemaError, user_signup_schema
 from modules.user.service import UserService
-from utils.authorize_permissions import authorize_permissions
+from utils.util import Util
 
 
 class AuthController:
+
+    def __init__(self):
+        self.util = Util()
 
     def handler(self):
         while True:
@@ -45,7 +48,7 @@ class AuthController:
                 break
             else : print('Invalid credentials')
 
-        if authorize_permissions(user_info[0], 'admin'):
+        if self.util.authorize_permissions(user_info[0], 'admin'):
             AdminMenu(user_info)
         else :
             UserMenu(user_info)

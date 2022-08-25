@@ -48,5 +48,5 @@ class UserController:
 
 
     def get_all_users(self):
-        pass
+        self.user_service.get_all_users()
 

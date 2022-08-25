@@ -1,21 +1,16 @@
 
 
-import xml.etree.ElementTree as ET
-
-tree = ET.parse('./config/queries.xml')
-
-root = tree.getroot()
-
 import hashlib
 import uuid
 
-from utils.connect import connection_obj
+from utils.util import Util
 
 
 class AuthService:
 
     def __init__(self):
-        self.cnx = connection_obj.getInstance()
+        self.util = Util()
+        self.root = self.util.get_query_root()
 
     def encrypt_password(self, password):
         hash_string = password
@@ -33,27 +28,22 @@ class AuthService:
 
         unique_user_id = str(uuid.uuid1())
 
-        create_user_query = root[0].text.format(unique_user_id, schema['full_name'], schema['email'], hashedPassword, schema['phone'], schema['aadhar'], schema['DOB'])
+        create_user_query = self.root[0].text.format(unique_user_id, schema['full_name'], schema['email'], hashedPassword, schema['phone'], schema['aadhar'], schema['DOB'])
 
-        cursor = self.cnx.cursor()
-
-        # Improve
         try:
-            cursor.execute(create_user_query)
-            self.cnx.commit()
+            cursor = self.util.execute_query_with_commit(create_user_query)
         except:
             return False
 
 
-        cursor.execute(root[1].text)
+        cursor = self.util.execute_query(self.root[1].text)
 
         role_id = list(cursor)[0][0]
 
-        create_user_role_mapping_query = root[2].text.format(role_id, unique_user_id)
+        create_user_role_mapping_query = self.root[2].text.format(role_id, unique_user_id)
 
-        cursor.execute(create_user_role_mapping_query)
+        cursor = self.util.execute_query_with_commit(create_user_role_mapping_query)
 
-        self.cnx.commit()
         cursor.close()
 
         return unique_user_id
@@ -61,13 +51,9 @@ class AuthService:
 
     def login(self, email, password):
         
-        search_user = root[3].text.format(email)
+        search_user = self.root[3].text.format(email)
 
-        cursor = self.cnx.cursor()
-
-        print(search_user)
-
-        cursor.execute(search_user)
+        cursor = self.util.execute_query(search_user)
 
         queryList = list(cursor)
 
