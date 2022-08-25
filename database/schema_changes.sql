@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS users (
-    id INT UNIQUE NOT NULL,
+    id INT UNIQUE NOT NULL AUTO_INCREMENT,
     full_name VARCHAR(20) NOT NULL, 
-    password VARCHAR(20) NOT NULL,
+    password VARCHAR(100) NOT NULL,
     aadhar INT NOT NULL PRIMARY KEY,
     isApproved INT DEFAULT 0,
     phone INT NOT NULL, 
@@ -13,16 +13,16 @@ CREATE TABLE IF NOT EXISTS users (
     );
 
 CREATE TABLE IF NOT EXISTS user_role (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     role_id INT NOT NULL,
     user_id INT NOT NULL,
     FOREIGN KEY (role_id) REFERENCES role(id),
     FOREIGN KEY (user_id) REFERENCES users(id),
-    created_at TIMESTAMP,
+    created_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS role (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     role_name VARCHAR(20) NOT NULL,
     created_at TIMESTAMP,
     modified_by INT,
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS role (
 );
 
 CREATE TABLE IF NOT EXISTS approval_requests (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     user_aadhar INT NOT NULL,
     account_type INT NOT NULL,
     approved_by INT NOT NULL,
