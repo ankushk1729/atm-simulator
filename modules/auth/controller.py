@@ -47,6 +47,7 @@ class AuthController:
 
         user_service  = UserService()
         is_user_exists = True
+        aadhar = 0
         while is_user_exists:
             aadhar = input('Enter your aadhar number : ')
             try:
@@ -79,5 +80,8 @@ class AuthController:
         
         auth_service = AuthService()
 
-        auth_service.signup(schema)
+        user_id = auth_service.signup(schema)
+        print('84', user_id)
+
+        return (user_id, aadhar)
 

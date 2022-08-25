@@ -1,5 +1,10 @@
 # ATM Simulator to Deposit and withdrawal amount 
 
+## Tasks completed 
+- User signup and login
+- Add to user_role mapping
+- create user
+- approve user by id and aadhar
 
 ## User account information  
 

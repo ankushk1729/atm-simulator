@@ -37,6 +37,7 @@ class AuthService:
 
         cursor = self.cnx.cursor()
 
+        # Improve
         try:
             cursor.execute(create_user_query)
             self.cnx.commit()
@@ -54,6 +55,8 @@ class AuthService:
 
         self.cnx.commit()
         cursor.close()
+
+        return unique_user_id
 
 
     def login(self, email, password):

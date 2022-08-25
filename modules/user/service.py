@@ -1,6 +1,10 @@
+import xml.etree.ElementTree as ET
+
 from utils.connect import connection_obj
 
+tree = ET.parse('./config/queries.xml')
 
+root = tree.getroot()
 class UserService:
 
     def __init__(self):
@@ -23,3 +27,16 @@ class UserService:
         if len(queryList) < 1: return False
         return True
 
+    def approve_user(self, unique_field_key, unique_field_value):
+        cursor = self.cnx.cursor()
+        if unique_field_key == 'id':
+            approve_user_query = root[4].text.format(unique_field_key, unique_field_value)
+            cursor.execute(approve_user_query)
+            self.cnx.commit()
+            cursor.close()
+
+        elif unique_field_key == 'aadhar':
+            approve_user_query = root[5].text.format(unique_field_key, unique_field_value)
+            cursor.execute(approve_user_query)
+            self.cnx.commit()
+            cursor.close()
