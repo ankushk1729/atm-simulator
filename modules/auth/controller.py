@@ -1,5 +1,5 @@
 from modules.auth.service import AuthService
-from modules.user.schema import Schema, SchemaError, user_schema
+from modules.user.schema import Regex, SchemaError, user_signup_schema
 from modules.user.service import UserService
 
 
@@ -31,27 +31,38 @@ class AuthController:
             case 0:
                 return 0
 
-    def login():
-        pass
-        # cnx = connection_obj.getInstance()
-        # cursor = cnx.cursor()
-        # cursor.execute('SELECT * from role')
-        # for data in cursor:
-        #     print(data)
+    def login(self):
+        is_login_schema_correct = False
+        
+        while not is_login_schema_correct:
+            email = input('Enter your email : ')
+            password = input('Enter your password : ')
+            if email and password:
+                is_login_schema_correct = True
+
+        auth_service = AuthService()
+        auth_service.login(email, password)
+
 
     def signup(self):
 
         user_service  = UserService()
         is_user_exists = True
         while is_user_exists:
-            aadhar = int(input('Enter your aadhar number : '))
+            aadhar = input('Enter your aadhar number : ')
+            try:
+                if not aadhar.isdigit() : raise TypeError('Invalid input, please enter a number')
+            except TypeError as error:
+                print(str(error))
+                continue
+
             if user_service.check_user_exists(aadhar):
                 print('User with this aadhar already exists')
             else :
                 is_user_exists = False
 
-        is_user_schema_correct = False
-        while not is_user_schema_correct:
+        is_signup_schema_correct = False
+        while not is_signup_schema_correct:
             try: 
                 full_name = input('Enter your full name :')
                 email = input('Enter your email : ')
@@ -59,8 +70,8 @@ class AuthController:
                 phone = int(input('Enter your phone : '))
                 DOB = input('Enter your DOB in format DD-MM-YY : ')
                 schema = {'full_name' : full_name, 'email' : email, 'phone': phone, 'aadhar': aadhar, 'password' : password, 'DOB': DOB}
-                user_schema.validate(schema)
-                is_user_schema_correct = True
+                user_signup_schema.validate(schema)
+                is_signup_schema_correct = True
             except SchemaError as error: 
                 print(str(error))
 

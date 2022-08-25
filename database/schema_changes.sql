@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
     DOB VARCHAR(20) NOT NULL,
     isApproved INT DEFAULT 0,
     phone INT NOT NULL, 
-    email VARCHAR(30) NOT NULL,
+    email VARCHAR(30) NOT NULL UNIQUE,
     created_at TIMESTAMP,
     updated_at TIMESTAMP,
     modified_by INT,

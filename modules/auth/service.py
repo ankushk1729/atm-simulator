@@ -26,3 +26,9 @@ class AuthService:
         self.cnx.commit()
 
         cursor.close()
+
+
+    def login(self, email, password):
+        
+
+        find_user = "select * from users where "

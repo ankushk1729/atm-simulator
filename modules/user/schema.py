@@ -1,6 +1,6 @@
 from schema import And, Regex, Schema, SchemaError, Use
 
-user_schema = Schema(
+user_signup_schema = Schema(
     {
         'full_name': And(Use(str), lambda n : len(n) < 20 ,error = 'Invalid name'),
         'password': Use(str, error = 'Invalid password'),
@@ -10,3 +10,6 @@ user_schema = Schema(
         'DOB': Use(str)
     }
 )
+
+
+#/\w*((\%27)|(\'))((\%6F)|o|(\%4F))((\%72)|r|(\%52))/ix
