@@ -3,6 +3,8 @@
     <GET_ROLE_ID>select id from role where role_name = 'user';</GET_ROLE_ID>
     <CREATE_USER_ROLE_MAPPING>insert into user_role(role_id, user_id) values('{}', '{}');</CREATE_USER_ROLE_MAPPING>
     <GET_USER_BY_EMAIL>select * from users where email = '{}';</GET_USER_BY_EMAIL>
-    <APPROVE_USER_BY_ID>update users set isApproved = 1 where {} = '{}'</APPROVE_USER_BY_ID>
-    <APPROVE_USER_BY_AADHAR>update users set isApproved = 1 where {} = {}</APPROVE_USER_BY_AADHAR>
+    <APPROVE_USER_BY_ID>update users set isApproved = 1 where {} = '{}';</APPROVE_USER_BY_ID>
+    <APPROVE_USER_BY_AADHAR>update users set isApproved = 1 where {} = {};</APPROVE_USER_BY_AADHAR>
+    <SEARCH_USERS_BY_NAME>select full_name, email, phone from users where full_name like '{}%';</SEARCH_USERS_BY_NAME>
+    <GET_USER_BY_AADHAR>select * from users where aadhar = {};</GET_USER_BY_AADHAR>
 </queries>

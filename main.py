@@ -7,4 +7,8 @@ from modules.user.controller import UserController
 
 user_controller = UserController()
 
-user_controller.create_user()
+# user_controller.create_user()
+
+# user_controller.search_users_by_name()
+
+user_controller.get_user_data(123)

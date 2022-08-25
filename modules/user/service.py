@@ -40,3 +40,39 @@ class UserService:
             cursor.execute(approve_user_query)
             self.cnx.commit()
             cursor.close()
+
+
+    def search_users(self, search_key, search_value):
+
+        search_user_query = root[6].text.format(search_value)
+        
+        cursor = self.cnx.cursor()
+
+        try:
+            cursor.execute(search_user_query)
+        except:
+            print('Unable to find the users')
+            return []
+
+        user_search_list = list(cursor)
+
+        return user_search_list
+
+    def get_user(self, aadhar):
+
+        get_user_query = root[7].text.format(aadhar)
+
+        cursor = self.cnx.cursor()
+
+        try:
+            cursor.execute(get_user_query)
+        except:
+            print('Unable to find the user')
+            return None
+
+        users_list = list(cursor)
+        if len(users_list) < 1 : 
+            return None
+
+        user = users_list[0]
+        return user

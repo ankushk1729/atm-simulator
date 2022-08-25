@@ -3,8 +3,10 @@
 ## Tasks completed 
 - User signup and login
 - Add to user_role mapping
-- create user
-- approve user by id and aadhar
+- Create user
+- Approve user by id and aadhar
+- Search user by name
+- Get single user data
 
 ## User account information  
 
