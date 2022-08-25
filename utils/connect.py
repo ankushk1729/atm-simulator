@@ -20,7 +20,7 @@ class Connect:
         raise Exception("Already instantialzed the connection")
       else:
         Connect.__instance = self
-        print(root[0].text, root[1].text, root[2].text, root[3].text)
+        
         self.cnx = mysql.connector.connect(user= root[0].text, password=root[1].text,host=root[2].text,
                               database=root[3].text)
 

@@ -1,4 +1,9 @@
+
+
+#19:02
+
 import hashlib
+import uuid
 
 from modules.user.service import UserService
 from utils.connect import connection_obj
@@ -18,22 +23,50 @@ class AuthService:
         
         hashedPassword = self.encrypt_password(schema['password'])
 
-        query = "insert into users(full_name, email, password, phone, aadhar, DOB) values((%s), (%s), (%s), (%s), (%s), (%s))"
+        unique_user_id = str(uuid.uuid1())
+
+        query = "insert into users(id, full_name, email, password, phone, aadhar, DOB) values((%s), (%s), (%s), (%s), (%s), (%s), (%s))"
 
         cursor = self.cnx.cursor()
 
-        cursor.execute(query, [schema['full_name'], schema['email'], hashedPassword, schema['phone'], schema['aadhar'], schema['DOB']])
+        cursor.execute(query, [unique_user_id, schema['full_name'], schema['email'], hashedPassword, schema['phone'], schema['aadhar'], schema['DOB']])
 
         self.cnx.commit()
+        
+        get_role_id_query = "select id from role where role_name = 'user'"
 
+        cursor.execute(get_role_id_query)
+
+        role_id = list(cursor)[0][0]
+
+        create_user_role_mapping_query = "insert into user_role(role_id, user_id) values('{}', '{}')".format(role_id, unique_user_id)
+
+        cursor.execute(create_user_role_mapping_query)
+
+        self.cnx.commit()
         cursor.close()
 
-    # Pending sql injection check
+
+
+
+
+
+
+
     def login(self, email, password):
         
-        user_service = UserService()
-        if not user_service.check_user_exists('email', email): 
-            print("User doesn't exist")
-            return 0
-        else : return 1
+        search_user = "select * from users where email = '{}'".format(email)
+
+        cursor = self.cnx.cursor()
+
+
+        cursor.execute(search_user)
+
+        queryList = list(cursor)
+
+        if len(queryList) < 1 : 
+            return False
+            
+
+        return cursor[0]
 

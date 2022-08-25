@@ -40,7 +40,7 @@ class AuthController:
         
             if auth_service.login(email, password) :
                 break
-
+            else : print('Invalid credentials')
 
     def signup(self):
 
