@@ -37,8 +37,9 @@ class AuthController:
         while True:
             email = input('Enter your email : ')
             password = input('Enter your password : ')
-        
-            if auth_service.login(email, password) :
+            user_info = auth_service.login(email, password)
+            if  user_info :
+                print(user_info)
                 break
             else : print('Invalid credentials')
 

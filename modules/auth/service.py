@@ -19,6 +19,11 @@ class AuthService:
         hash_string = hash_string.encode()
         return hashlib.sha256(hash_string).hexdigest()
 
+    def compare_password(self, candidate_password, password):
+        hash_string = candidate_password
+        hash_string = hash_string.encode()
+        return hashlib.sha256(hash_string).hexdigest() == password
+
     def signup(self, schema):
         
         hashedPassword = self.encrypt_password(schema['password'])
@@ -39,7 +44,7 @@ class AuthService:
 
         role_id = list(cursor)[0][0]
 
-        create_user_role_mapping_query = "insert into user_role(role_id, user_id) values('{}', '{}')".format(role_id, unique_user_id)
+        create_user_role_mapping_query = "insert into user_role(role_id, user_id) values('{}', '{}');".format(role_id, unique_user_id)
 
         cursor.execute(create_user_role_mapping_query)
 
@@ -47,18 +52,13 @@ class AuthService:
         cursor.close()
 
 
-
-
-
-
-
-
     def login(self, email, password):
         
-        search_user = "select * from users where email = '{}'".format(email)
+        search_user = "select * from users where email = '{}';".format(email)
 
         cursor = self.cnx.cursor()
 
+        print(search_user)
 
         cursor.execute(search_user)
 
@@ -66,7 +66,13 @@ class AuthService:
 
         if len(queryList) < 1 : 
             return False
-            
 
-        return cursor[0]
+        user_password = queryList[0][2]       
+        is_password_correct = self.compare_password(password, user_password)
+
+        if not is_password_correct :
+            return False
+
+        cursor.close()
+        return queryList[0]
 
