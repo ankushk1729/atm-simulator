@@ -6,15 +6,15 @@ class UserService:
     def __init__(self):
         self.cnx = connection_obj.getInstance()
 
-    def check_user_exists(self, aadhar):
-        query = "select aadhar, id from users where aadhar = (%s)"
+    def check_user_exists(self, param_key, param_value):
+        query = "select aadhar, id from users where {} = (%s)".format(param_key)
         cursor = self.cnx.cursor()
 
-        aadhar_value = []
-        aadhar_value.insert(0, aadhar)
+        param_list = []
+        param_list.insert(0, param_value)
 
 
-        cursor.execute(query, aadhar_value)
+        cursor.execute(query, param_list)
 
         queryList = list(cursor)
     

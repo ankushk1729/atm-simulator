@@ -1,5 +1,6 @@
 import hashlib
 
+from modules.user.service import UserService
 from utils.connect import connection_obj
 
 
@@ -27,8 +28,12 @@ class AuthService:
 
         cursor.close()
 
-
+    # Pending sql injection check
     def login(self, email, password):
         
+        user_service = UserService()
+        if not user_service.check_user_exists('email', email): 
+            print("User doesn't exist")
+            return 0
+        else : return 1
 
-        find_user = "select * from users where "

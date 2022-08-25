@@ -32,16 +32,14 @@ class AuthController:
                 return 0
 
     def login(self):
-        is_login_schema_correct = False
+        auth_service = AuthService()
         
-        while not is_login_schema_correct:
+        while True:
             email = input('Enter your email : ')
             password = input('Enter your password : ')
-            if email and password:
-                is_login_schema_correct = True
-
-        auth_service = AuthService()
-        auth_service.login(email, password)
+        
+            if auth_service.login(email, password) :
+                break
 
 
     def signup(self):
@@ -56,12 +54,14 @@ class AuthController:
                 print(str(error))
                 continue
 
-            if user_service.check_user_exists(aadhar):
+            if user_service.check_user_exists('aadhar', aadhar):
                 print('User with this aadhar already exists')
             else :
                 is_user_exists = False
 
         is_signup_schema_correct = False
+
+
         while not is_signup_schema_correct:
             try: 
                 full_name = input('Enter your full name :')
