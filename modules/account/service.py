@@ -1,4 +1,6 @@
 from utils.util import Util
+
+
 class AccountService:
     
     def __init__(self, user_info):
@@ -6,9 +8,8 @@ class AccountService:
         self.util = Util()
         self.root = self.util.get_query_root()
 
-    def create_account(self, user_id, account_type):
-        print(user_id, account_type)
-        create_acc_query = self.root[12].text.format(account_type, user_id)
+    def create_account(self, user_aadhar, account_type):
+        create_acc_query = self.root[12].text.format(account_type, user_aadhar)
         print(create_acc_query)
         cursor = self.util.execute_query_with_commit(create_acc_query)
 
@@ -34,4 +35,15 @@ class AccountService:
         pending_requests_query = self.root[14].text
 
         self.util.execute_query(pending_requests_query)
+
+
+    def get_user_accounts(self, user_aadhar):
+
+        user_accounts_query = self.root[16].text.format(user_aadhar)
+
+        cursor = self.util.execute_query(user_accounts_query)
+        account_list = list(cursor)
+        cursor.close()
+        return account_list
+
 

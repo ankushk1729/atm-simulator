@@ -44,7 +44,7 @@ class UserController:
         requested_user = pending_users[choice - 1]
         self.user_service.approve_user('aadhar', requested_user[2])
 
-        self.account_conrtoller.create_account(self.user_info[0])
+        self.account_conrtoller.create_account(self.user_info[3])
 
 
     def search_users_by_name(self):
@@ -62,16 +62,17 @@ class UserController:
 
     def get_current_user_data(self):
 
-        print(self.user_info[3])
-
         user = self.user_service.get_user(self.user_info[3])
+    
+        user_list = [user]
+        user_table = PrettyTable()
+        user_table.field_names = ['full_name', 'aadhar', 'email', 'phone']
+        for user in user_list:
+            user_table.add_row((user[1], user[3], user[7], user[6]))
 
-        if user == None:
-            print('No user found with given aadhar')
-            return None
-        else : 
-            # print(user)
-            return user
+        print(user_table)
+
+        return user
 
 
     def show_pending_users(self):
