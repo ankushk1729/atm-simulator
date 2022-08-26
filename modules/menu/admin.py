@@ -19,14 +19,14 @@ class AdminMenu:
             for i in range(0, len(admin_operations)):
                 operation_text = admin_tasks_to_function_mapping[admin_operations[i]]
                 print('Select {} to {}'.format(i, operation_text))
-            print('Select 8 to exit')
+            print('Select 7 to exit')
 
             try:
                 choice = input()
                 if not choice.isdigit() : raise TypeError('Invalid input, please enter a number')
-                if int(choice) == 8:
+                if int(choice) == 7:
                     break   
-                if not (int(choice) >= 0 and int(choice) <= 7) : raise ValueError('Please enter a number between 0 and 4')
+                if not (int(choice) >= 0 and int(choice) <= 6) : raise ValueError('Please enter a number between 0 and 4')
             except ValueError as error:
                 print(str(error))
             except TypeError as error:
@@ -36,7 +36,7 @@ class AdminMenu:
             
             match choice:
                 case 0:
-                    print(self.user_controller.search_users_by_name())
+                    self.user_controller.search_users_by_name()
                 case 1:
                     self.user_controller.approve_user()
                 case 2:

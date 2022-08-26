@@ -16,7 +16,6 @@ class UserController:
         auth_controller = AuthController()
 
         (user_id, aadhar) = auth_controller.signup()
-        print(user_id)
         self.approve_user_by_unique_key('id', str(user_id))
 
     def approve_user(self):

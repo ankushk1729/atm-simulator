@@ -10,7 +10,6 @@
 ## Tasks completed 
 - User signup and login
 - Add to user_role mapping
-- Create user
 - Approve user by id and aadhar
 - Search user by name
 - Get single user data
@@ -18,6 +17,7 @@
 ## Pending remember
 - Mask password
 - Transactions
+- view account balance
 
 ## User account information  
 

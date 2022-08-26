@@ -3,7 +3,7 @@ from modules.transaction.controller import TransactionController as TC
 from modules.user.controller import UserController as UC
 
 user_operations = ["view_details", "view_balance", "view_transactions", "withdraw", "deposit"]
-admin_operations = ["search_users", "approve_user", "create_account", "create_user", "delete_user","view_all_users", "view_all_transactions", "search_users"]
+admin_operations = ["search_users", "approve_user", "create_account", "create_user", "delete_user","view_all_users", "view_all_transactions"]
 
 admin_tasks_to_function_mapping = {
     "search_users": "Search users",
