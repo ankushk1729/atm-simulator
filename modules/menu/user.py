@@ -13,14 +13,16 @@ class UserMenu:
 
         while True:
             for i in range(0, len(user_operations)):
-                operation_text = user_tasks_to_function_mapping[user_operations[i]][0]
+                operation_text = user_tasks_to_function_mapping[user_operations[i]]
                 print('Select {} to {}'.format(i, operation_text))
             print('Select 5 to exit')
 
             try:
                 choice = input()
                 if not choice.isdigit() : raise TypeError('Invalid input, please enter a number')
-                if not (int(choice) >= 0 and int(choice) <= 4) : raise ValueError('Please enter a number between 0 and 2')
+                if int(choice) == 5:
+                    return 0
+                if not (int(choice) >= 0 and int(choice) <= 4) : raise ValueError('Please enter a number between 0 and 4')
                 break
             except ValueError as error:
                 print(str(error))
@@ -28,7 +30,6 @@ class UserMenu:
                 print(str(error))
 
         choice = int(choice)
-
         
         match choice:
             case 0:

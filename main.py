@@ -1,3 +1,4 @@
+from modules.account.controller import AccountController
 from modules.auth.controller import AuthController
 from modules.user.controller import UserController
 from utils.util import Util

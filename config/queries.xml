@@ -11,4 +11,8 @@
     <GET_ROLE_FROM_ROLE_ID>select role_name from role where id = {};</GET_ROLE_FROM_ROLE_ID>
     <GET_ALL_USERS>select id, full_name, aadhar, email, phone from users;</GET_ALL_USERS>
     <CHECK_USER_EXISTS>select aadhar, id from users where {} = {};</CHECK_USER_EXISTS>
+    <CREATE_USER_ACCOUNT>insert into account(account_type, user_id) values ({}, '{}');</CREATE_USER_ACCOUNT>
+    <GET_ACCOUNT_ID_FROM_NAME>select id from account_type where name = '{}';</GET_ACCOUNT_ID_FROM_NAME>
+    <GET_PENDING_APPROVALS>select id, user_aadhar from approval_requests;</GET_PENDING_APPROVALS>
+    <CREATE_APPROVAL_REQUEST>insert into approval_requests(user_aadhar, account_type) values({}, {});</CREATE_APPROVAL_REQUEST>
 </queries>

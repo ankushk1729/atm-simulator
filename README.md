@@ -7,11 +7,10 @@
 - Approve user by id and aadhar
 - Search user by name
 - Get single user data
-
+- Add to approval requests on signup
 ## Pending remember
-- Add queries.xml root tree import to util function
 - Mask password
-- Approve requests
+- Transactions
 
 ## User account information  
 

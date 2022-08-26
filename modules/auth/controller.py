@@ -1,6 +1,8 @@
+from modules.account.service import AccountService
 from modules.auth.service import AuthService
 from modules.menu.admin import AdminMenu
 from modules.menu.user import UserMenu
+from modules.user.controller import UserController
 from modules.user.schema import SchemaError, user_signup_schema
 from modules.user.service import UserService
 from utils.util import Util
@@ -10,6 +12,7 @@ class AuthController:
 
     def __init__(self):
         self.util = Util()
+        
 
     def handler(self):
         while True:
@@ -91,6 +94,31 @@ class AuthController:
         auth_service = AuthService()
 
         user_id = auth_service.signup(schema)
+
+        name_to_key_mapping = {1: 'savings', 2: 'current'}
+        print('Please specify the type of account you want to open')
+        while True:
+
+            print('Enter 1 to open savings account')
+            print('Enter 2 to open current account')
+            print('Enter 0 to exit')
+            try:
+                choice = input()
+                if not choice.isdigit() : raise TypeError('Invalid input, please enter a number')
+                if int(choice) == 0:
+                    return 0
+                if not (int(choice) >= 0 and int(choice) <= 2) : raise ValueError('Please enter a number between 0 and 2')
+
+                break
+            except ValueError as error:
+                print(str(error))
+            except TypeError as error:
+                print(str(error))
+        
+        account_service = AccountService(schema)
+        account_type_id = account_service.get_account_type_id_by_name(name_to_key_mapping[int(choice)])
+        user_controller = UserController(schema)
+        user_controller.create_approval_request(aadhar, account_type_id)
 
         return (user_id, aadhar)
 

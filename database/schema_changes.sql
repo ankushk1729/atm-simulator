@@ -34,16 +34,16 @@ CREATE TABLE IF NOT EXISTS approval_requests (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_aadhar INT NOT NULL,
     account_type INT NOT NULL,
-    approved_by VARCHAR(70) NOT NULL,
+    approved_by VARCHAR(70),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    approved_at TIMESTAMP,
+    approved_at TIMESTAMP DEFAULT NULL,
     FOREIGN KEY (account_type) REFERENCES account_type(id),
     FOREIGN KEY (user_aadhar) REFERENCES users(aadhar),
-    FOREIGN KEY (approved_by) REFERENCES users(id),
+    FOREIGN KEY (approved_by) REFERENCES users(id)
 );
 
 CREATE TABLE IF NOT EXISTS account (
-    account_num VARCHAR(70) PRIMARY KEY,
+    account_num INT PRIMARY KEY AUTO_INCREMENT,
     balance INT DEFAULT 0,
     account_type INT,
     user_id VARCHAR(70),
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS account (
 );
 
 CREATE TABLE IF NOT EXISTS account_type (
-    id INT PRIMARY KEY, 
+    id INT PRIMARY KEY AUTO_INCREMENT, 
     name VARCHAR(20) DEFAULT 'savings',
     max_withdrawal_amount INT DEFAULT 0,
     min_balance INT DEFAULT 5000,

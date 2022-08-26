@@ -20,13 +20,12 @@ class UserService:
         
         if unique_field_key == 'id':
             approve_user_query = self.root[4].text.format(unique_field_key, unique_field_value)
-            cursor = self.util.execute_query_with_commit()
+            cursor = self.util.execute_query_with_commit(approve_user_query)
             cursor.close()
 
         elif unique_field_key == 'aadhar':
             approve_user_query = self.root[5].text.format(unique_field_key, unique_field_value)
-            cursor.execute(approve_user_query)
-            self.cnx.commit()
+            cursor = self.util.execute_query_with_commit(approve_user_query)
             cursor.close()
 
 
@@ -37,11 +36,11 @@ class UserService:
 
         
         cursor = self.util.execute_query(search_user_query)
-        cursor.close()
     
         user_search_list = list(cursor)
 
 
+        cursor.close()
         return user_search_list
 
     def get_user(self, aadhar):
@@ -67,3 +66,26 @@ class UserService:
             return []
 
         return list(cursor)
+
+    def get_pending_users(self):
+        pending_users_query = self.root[14].text
+
+        cursor = self.util.execute_query(pending_users_query)
+
+        query_list = list(cursor)
+
+        if len(query_list) < 1:
+            print('No pending approvals')
+            return []
+
+        cursor.close()
+
+        return query_list
+
+    def create_approval_req(self, user_aadhar, account_type):
+
+        create_approval_request_query = self.root[15].text.format(user_aadhar, account_type)
+
+        cursor = self.util.execute_query_with_commit(create_approval_request_query)
+
+        cursor.close()
