@@ -91,7 +91,6 @@ class UserService:
         return query_list
 
     def create_approval_req(self, user_aadhar, account_type):
-
         create_approval_request_query = self.root[15].text.format(user_aadhar, account_type)
 
         cursor = self.util.execute_query_with_commit(create_approval_request_query)
