@@ -1,5 +1,12 @@
 # ATM Simulator to Deposit and withdrawal amount 
 
+## Admin ops
+- search user
+-approve user
+- create new account
+
+
+
 ## Tasks completed 
 - User signup and login
 - Add to user_role mapping

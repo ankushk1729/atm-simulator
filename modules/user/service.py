@@ -28,6 +28,14 @@ class UserService:
             cursor = self.util.execute_query_with_commit(approve_user_query)
             cursor.close()
 
+        
+
+    def mark_request_as_approved(self, request_id):
+        mark_req_as_approved = self.root[18].text.format(request_id)
+
+        cursor = self.util.execute_query_with_commit(mark_req_as_approved)
+
+        
 
     def search_users(self, search_key, search_value):
 

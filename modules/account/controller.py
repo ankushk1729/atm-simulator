@@ -7,9 +7,27 @@ class AccountController:
         # self.account_num = account_num
         self.account_service = AccountService(user_info)
 
-    def create_account(self, user_aadhar):
-        
+
+    def create_account_handler(self):
+        while True:
+            try:
+                aadhar = input('Please enter the aadhar number of registered user')
+                if not aadhar.isdigit() : raise TypeError('Invalid input, please enter a number')
+                break
+            except ValueError as error:
+                print(str(error))
+            except TypeError as error:
+                print(str(error))
+
         account_type_id = self.get_account_selection()
+        if self.account_service.check_acc_type_exists_for_user(aadhar, account_type_id):
+            print('This account type already exists for this user')
+            return
+        self.account_service.create_account(aadhar, account_type_id)
+
+    def create_account(self, user_aadhar, account_type_id):
+        
+        # account_type_id = self.get_account_selection()
         self.account_service.create_account(user_aadhar, account_type_id)
 
     def get_account_selection(self):

@@ -9,7 +9,7 @@ class UserController:
 
     def __init__(self, user_info):
         self.user_service = UserService()
-        self.account_conrtoller = AccountController(user_info)
+        self.account_controller = AccountController(user_info)
         self.user_info = user_info
     
     def create_user(self):
@@ -22,12 +22,13 @@ class UserController:
     def approve_user(self):
 
         pending_users = self.show_pending_users()
-
+        if len(pending_users) < 1: return
         while True:
 
-            for i, val in pending_users:
-                print(i+1, 'aadhar - {}, id - {}'.format(val[2], val[0]))
+            for i, val in enumerate(pending_users):
+                print('{} aadhar - {}, id - {}'.format(i+1, val[1], val[0]))
             try:
+                print('Select the user name from given list : ')
                 choice = input()
                 if not choice.isdigit() : raise TypeError('Invalid input, please enter a number')
                 if int(choice) == 0:
@@ -42,9 +43,11 @@ class UserController:
 
         choice = int(choice)
         requested_user = pending_users[choice - 1]
-        self.user_service.approve_user('aadhar', requested_user[2])
+        self.user_service.approve_user('aadhar', requested_user[1])
 
-        self.account_conrtoller.create_account(self.user_info[3])
+        self.account_controller.create_account(requested_user[1], requested_user[2])
+
+        self.user_service.mark_request_as_approved(requested_user[0])
 
 
     def search_users_by_name(self):
@@ -81,7 +84,7 @@ class UserController:
         pending_users_table = PrettyTable()
         pending_users_table.field_names = ['data id', 'aadhar']
         for user in pending_users:
-            pending_users_table.add_row(user)
+            pending_users_table.add_row((user[0], user[1]))
 
         print(pending_users_table)
 

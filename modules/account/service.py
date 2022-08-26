@@ -10,7 +10,6 @@ class AccountService:
 
     def create_account(self, user_aadhar, account_type):
         create_acc_query = self.root[12].text.format(account_type, user_aadhar)
-        print(create_acc_query)
         cursor = self.util.execute_query_with_commit(create_acc_query)
 
         cursor.close()
@@ -46,4 +45,15 @@ class AccountService:
         cursor.close()
         return account_list
 
+    def check_acc_type_exists_for_user(self, aadhar, account_type):
+        check_acc_type_exists_for_user_query = self.root[17].text.format(aadhar, account_type)
 
+        cursor = self.util.execute_query(check_acc_type_exists_for_user_query)
+
+        if len(list(cursor)) > 0 : 
+            return True
+
+
+        cursor.close()
+
+        return False

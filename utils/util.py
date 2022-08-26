@@ -32,7 +32,7 @@ class Util:
 
         cursor = self.execute_query(search_role_id_query)
         search_list = list(cursor)
-
+        print(search_list)
         role_id = search_list[0][0]
 
         search_role_name_query = root[9].text.format(role_id)

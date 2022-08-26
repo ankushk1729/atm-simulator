@@ -40,7 +40,7 @@ class AdminMenu:
                 case 1:
                     self.user_controller.approve_user()
                 case 2:
-                    self.account_controller.create_account()
+                    self.account_controller.create_account_handler()
                 case 3:
                     self.user_controller.create_user()
                 case 4:

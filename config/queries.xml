@@ -13,7 +13,9 @@
     <CHECK_USER_EXISTS>select aadhar, id from users where {} = {};</CHECK_USER_EXISTS>
     <CREATE_USER_ACCOUNT>insert into account(account_type, user_aadhar) values ({}, '{}');</CREATE_USER_ACCOUNT>
     <GET_ACCOUNT_ID_FROM_NAME>select id from account_type where name = '{}';</GET_ACCOUNT_ID_FROM_NAME>
-    <GET_PENDING_APPROVALS>select id, user_aadhar from approval_requests;</GET_PENDING_APPROVALS>
+    <GET_PENDING_APPROVALS>select id, user_aadhar, account_type from approval_requests where status = 0;</GET_PENDING_APPROVALS>
     <CREATE_APPROVAL_REQUEST>insert into approval_requests(user_aadhar, account_type) values({}, {});</CREATE_APPROVAL_REQUEST>
     <GET_USER_ACCOUNTS>select * from account where user_aadhar = '{}';</GET_USER_ACCOUNTS>
+    <CHECK_ACC_TYPE_EXISTS_FOR_USER>select * from account where user_aadhar = {} and account_type = {};</CHECK_ACC_TYPE_EXISTS_FOR_USER>
+    <MARK_REQUEST_AS_APPROVED>update approval_requests set status = 1 where id = {};</MARK_REQUEST_AS_APPROVED>
 </queries>

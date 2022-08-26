@@ -39,7 +39,8 @@ CREATE TABLE IF NOT EXISTS approval_requests (
     approved_at TIMESTAMP DEFAULT NULL,
     FOREIGN KEY (account_type) REFERENCES account_type(id),
     FOREIGN KEY (user_aadhar) REFERENCES users(aadhar),
-    FOREIGN KEY (approved_by) REFERENCES users(id)
+    FOREIGN KEY (approved_by) REFERENCES users(id),
+    status INT DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS account (
