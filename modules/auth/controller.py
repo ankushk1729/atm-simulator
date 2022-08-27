@@ -12,6 +12,7 @@ class AuthController:
 
     def __init__(self):
         self.util = Util()
+        
 
     def login(self):
         auth_service = AuthService()

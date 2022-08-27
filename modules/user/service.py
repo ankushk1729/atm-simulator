@@ -66,14 +66,13 @@ class UserService:
 
     def get_all_users(self):
         get_users_query = self.root[10].text
-
-
         cursor = self.util.execute_query(get_users_query)
 
-        if len(list(cursor)) < 1 : 
+        if cursor == None:
             return []
-
-        return list(cursor)
+        
+        users_list = list(cursor)
+        return users_list
 
     def get_pending_users(self):
         pending_users_query = self.root[14].text

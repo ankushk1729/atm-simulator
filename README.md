@@ -14,6 +14,8 @@
 - Search user by name
 - Get single user data
 - Add to approval requests on signup
+- Get all txns
+- Get all users
 ## Pending remember
 - Mask password
 - Transactions

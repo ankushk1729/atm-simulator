@@ -68,20 +68,20 @@ CREATE TABLE IF NOT EXISTS account_type (
 );
 
 CREATE TABLE IF NOT EXISTS transaction(
-    ID INT PRIMARY KEY AUTO_INCREMENT,
-    TXN_TYPE INT,
-    AMOUNT  INT,
-    ACCOUNT_NUM  INT,
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    txn_type INT,
+    amount  INT,
+    account_num  INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY(TXN_TYPE) REFERENCES  transaction_type(id)
-    FOREIGN KEY(ACCOUNT_NUM REFERENCES  account_type(ACCOUNT_NUM))
+    FOREIGN KEY(txn_type) REFERENCES  transaction_type(id),
+    FOREIGN KEY(account_num) REFERENCES  account(account_num)
     );
 
 CREATE TABLE IF NOT EXISTS transaction_type (
-    ID INT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     full_name VARCHAR(30),
-    MODIFIED_BY  VARCHAR(70),
+    modified_by  VARCHAR(70),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY(MODIFIED_BY) REFERENCES  user(id)
+    FOREIGN KEY(modified_by) REFERENCES  users(id)
     );
