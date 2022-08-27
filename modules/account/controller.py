@@ -1,4 +1,5 @@
 from modules.account.service import AccountService
+from modules.user.service import UserService
 from prettytable import PrettyTable
 
 
@@ -7,6 +8,7 @@ class AccountController:
         self.user_info = user_info
         # self.account_num = account_num
         self.account_service = AccountService(user_info)
+        self.user_service = UserService()
 
 
     def create_account_handler(self):
@@ -19,7 +21,11 @@ class AccountController:
                 print(str(error))
             except TypeError as error:
                 print(str(error))
+        aadhar = int(aadhar)
 
+        if not self.user_service.check_user_exists('aadhar', aadhar):
+            print('No user with aadhar {}'.format(aadhar))
+            return
         account_type_id = self.get_account_selection()
         account_name = self.account_service.get_account_name_by_id(account_type_id)
         if self.account_service.check_acc_type_exists_for_user(aadhar, account_type_id):
