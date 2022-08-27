@@ -18,10 +18,12 @@
 - Get all users
 - Get all accounts
 - Get account transactions
+- Get account info
+- Check user approved
 ## Pending remember
 - Mask password
 - Transactions
-- view account balance
+
 
 ## User account information  
 
