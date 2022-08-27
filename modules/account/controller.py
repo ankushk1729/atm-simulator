@@ -60,7 +60,7 @@ class AccountController:
         user_accounts_table = PrettyTable()
         user_accounts_table.field_names = ['Account number', 'balance']
         for account in user_accounts:
-            user_accounts_table.add_row(account[0],account[1])
+            user_accounts_table.add_row((account[0],account[1]))
 
         print('\nHere are all the accounts')
         print(user_accounts_table)

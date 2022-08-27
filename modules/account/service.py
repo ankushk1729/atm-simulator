@@ -69,6 +69,26 @@ class AccountService:
         cursor.close()
 
         return accounts_list
+
+    def get_account_info(self, account_num):
+        account_info_query = self.root[23].text.format(account_num)
+
+        cursor = self.util.execute_query(account_info_query)
+
+        if cursor == None or len(list(cursor)) < 1:
+            return ()
+
+        account_info = list(cursor)[0]
+
+        cursor.close()
+
+        return account_info
+
         
+    def update_balance(self, balance, account_num):
 
+        update_balance_query = self.root[22].text.format(balance, account_num)
 
+        cursor = self.util.execute_query_with_commit(update_balance_query)
+
+        cursor.close()
