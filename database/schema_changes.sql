@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS transaction(
 
 CREATE TABLE IF NOT EXISTS transaction_type (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    full_name VARCHAR(30),
+    name VARCHAR(30),
     modified_by  VARCHAR(70),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

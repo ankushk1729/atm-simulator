@@ -55,12 +55,16 @@ class AccountController:
 
     def get_balance(self):
 
-        print('Please select the account : ')
-
         user_accounts = self.account_service.get_user_accounts(self.user_info[3])
         
-        for i, user_acct in enumerate(user_accounts):
-            print('{} Account number :{}, balance : {}'.format(i + 1,user_acct[0], user_acct[1]))
+        user_accounts_table = PrettyTable()
+        user_accounts_table.field_names = ['Account number', 'balance']
+        for account in user_accounts:
+            user_accounts_table.add_row(account[0],account[1])
+
+        print('\nHere are all the accounts')
+        print(user_accounts_table)
+
 
 
     def get_all_accounts(self):

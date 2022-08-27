@@ -12,12 +12,24 @@ class TransactionService:
         cursor = self.util.execute_query(get_txns_query)
 
         if cursor == None:
-            return
+            return []
         
         txns_list = list(cursor)
+        cursor.close()
         return txns_list
 
+    def get_account_transactions(self, account_num):
+        get_account_transactions_query = self.root[21].text.format(account_num)
 
+        cursor = self.util.execute_query(get_account_transactions_query)
+        if cursor == None:
+            return []
+        
+        txn_list = list(cursor)
+
+        cursor.close()
+
+        return txn_list
 
 
 

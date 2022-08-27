@@ -17,6 +17,7 @@
 - Get all txns
 - Get all users
 - Get all accounts
+- Get account transactions
 ## Pending remember
 - Mask password
 - Transactions

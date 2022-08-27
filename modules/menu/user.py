@@ -1,5 +1,6 @@
 from config.data import user_operations, user_tasks_to_function_mapping
 from modules.account.controller import AccountController
+from modules.transaction.controller import TransactionController
 from modules.user.controller import UserController
 
 
@@ -9,6 +10,7 @@ class UserMenu:
         self.user_info = user_info
         self.user_controller = UserController(user_info, {})
         self.account_controller = AccountController(user_info)
+        self.transaction_controller = TransactionController(user_info)
         self.show_options()
 
     def show_options(self):
@@ -38,7 +40,7 @@ class UserMenu:
                 case 1:
                     self.account_controller.get_balance()
                 case 2:
-                    self.user_controller.get_user_txns()
+                    self.transaction_controller.get_user_txns()
                 case 3:
                     self.user_controller.withdraw()
                 case 4:
