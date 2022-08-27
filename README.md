@@ -16,6 +16,7 @@
 - Add to approval requests on signup
 - Get all txns
 - Get all users
+- Get all accounts
 ## Pending remember
 - Mask password
 - Transactions

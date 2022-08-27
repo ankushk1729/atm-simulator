@@ -1,8 +1,5 @@
 from modules.account.service import AccountService
 from modules.auth.service import AuthService
-from modules.menu.admin import AdminMenu
-from modules.menu.user import UserMenu
-from modules.user.controller import UserController
 from modules.user.schema import SchemaError, user_signup_schema
 from modules.user.service import UserService
 from utils.util import Util
@@ -12,6 +9,7 @@ class AuthController:
 
     def __init__(self):
         self.util = Util()
+        self.user_service = UserService()
         
 
     def login(self):
@@ -25,10 +23,7 @@ class AuthController:
                 break
             else : print('Invalid credentials')
 
-        if self.util.authorize_permissions(user_info[0], 'admin'):
-            AdminMenu(user_info)
-        else :
-            UserMenu(user_info)
+        return user_info
 
     def signup(self):
 
@@ -91,8 +86,14 @@ class AuthController:
         
         account_service = AccountService(schema)
         account_type_id = account_service.get_account_type_id_by_name(name_to_key_mapping[int(choice)])
-        user_controller = UserController(schema)
-        user_controller.create_approval_request(aadhar, account_type_id)
+        self.create_approval_request(aadhar, account_type_id)
 
         return (user_id, aadhar)
+
+    def create_user(self):
+        (user_id, aadhar) = self.signup()
+        self.user_service.approve_user('id', str(user_id))
+    
+    def create_approval_request(self, user_aadhar, account_type):
+        self.user_service.create_approval_req(user_aadhar, account_type)
 

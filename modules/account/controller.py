@@ -1,4 +1,5 @@
 from modules.account.service import AccountService
+from prettytable import PrettyTable
 
 
 class AccountController:
@@ -61,3 +62,14 @@ class AccountController:
         for i, user_acct in enumerate(user_accounts):
             print('{} Account number :{}, balance : {}'.format(i + 1,user_acct[0], user_acct[1]))
 
+
+    def get_all_accounts(self):
+        all_accounts = self.account_service.get_all_accounts()
+
+        all_accounts_table = PrettyTable()
+        all_accounts_table.field_names = ['Account number', 'balance', "User's aadhar", 'name']
+        for account in all_accounts:
+            all_accounts_table.add_row((account[0],account[1], account[3], account[7]))
+
+        print('\nHere are all the accounts')
+        print(all_accounts_table)

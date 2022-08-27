@@ -7,7 +7,7 @@ class UserMenu:
     def __init__(self, user_info):
         print('Welcome {}, '.format(user_info[1]))
         self.user_info = user_info
-        self.user_controller = UserController(user_info)
+        self.user_controller = UserController(user_info, {})
         self.account_controller = AccountController(user_info)
         self.show_options()
 

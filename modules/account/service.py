@@ -57,3 +57,18 @@ class AccountService:
         cursor.close()
 
         return False
+
+    def get_all_accounts(self):
+        all_accounts_query = self.root[20].text
+
+        cursor = self.util.execute_query(all_accounts_query)
+        accounts_list = list(cursor)
+        if cursor == None:
+            return []
+
+        cursor.close()
+
+        return accounts_list
+        
+
+

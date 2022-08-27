@@ -19,4 +19,5 @@
     <CHECK_ACC_TYPE_EXISTS_FOR_USER>select * from account where user_aadhar = {} and account_type = {};</CHECK_ACC_TYPE_EXISTS_FOR_USER>
     <MARK_REQUEST_AS_APPROVED>update approval_requests set status = 1 where id = {};</MARK_REQUEST_AS_APPROVED>
     <GET_ALL_TXNS>select * from transaction</GET_ALL_TXNS>
+    <GET_ALL_ACCOUNTS>select account.*, account_type.name from account inner join account_type on account.account_type = account_type.id;</GET_ALL_ACCOUNTS>
 </queries>

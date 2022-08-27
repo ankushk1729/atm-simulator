@@ -7,16 +7,13 @@ from prettytable import PrettyTable
 
 class UserController:
 
-    def __init__(self, user_info, account_controller = None):
+    def __init__(self, user_info, auth_controller):
         self.user_service = UserService()
-        if not account_controller == None : self.account_controller = account_controller
+        self.auth_controller = auth_controller
+        self.account_controller = AccountController(user_info)
         self.user_info = user_info
     
-    def create_user(self):
-        auth_controller = AuthController()
-
-        (user_id, aadhar) = auth_controller.signup()
-        self.approve_user_by_unique_key('id', str(user_id))
+    
 
     def approve_user(self):
 
@@ -44,7 +41,7 @@ class UserController:
         requested_user = pending_users[choice - 1]
         self.user_service.approve_user('aadhar', requested_user[1])
 
-        account_controller.create_account(requested_user[1], requested_user[2])
+        self.account_controller.create_account(requested_user[1], requested_user[2])
 
         self.user_service.mark_request_as_approved(requested_user[0])
 
@@ -92,7 +89,6 @@ class UserController:
 
     def get_all_users(self):
         all_users = self.user_service.get_all_users()
-        print('all users', all_users)
         all_users_table = PrettyTable()
         all_users_table.field_names = ['Id','Full Name', 'Aadhar', 'Email', 'Phone']
         for user in all_users:
@@ -105,5 +101,3 @@ class UserController:
     def delete_user():
         pass
 
-    def create_approval_request(self, user_aadhar, account_type):
-        self.user_service.create_approval_req(user_aadhar, account_type)
