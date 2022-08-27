@@ -8,8 +8,8 @@ class AccountService:
         self.util = Util()
         self.root = self.util.get_query_root()
 
-    def create_account(self, user_aadhar, account_type):
-        create_acc_query = self.root[12].text.format(account_type, user_aadhar)
+    def create_account(self, user_aadhar, account_type, initial_balance):
+        create_acc_query = self.root[12].text.format(account_type, user_aadhar, initial_balance)
         cursor = self.util.execute_query_with_commit(create_acc_query)
 
         cursor.close()
@@ -21,7 +21,6 @@ class AccountService:
         cursor = self.util.execute_query(get_account_id_query)
 
         query_list = list(cursor)
-        # print(query_list)
         cursor.close()
         if len(query_list) < 1 : 
             return None
@@ -50,12 +49,12 @@ class AccountService:
 
         cursor = self.util.execute_query(check_acc_type_exists_for_user_query)
 
-        if len(list(cursor)) > 0 : 
+        query_list = list(cursor)
+        if len(query_list) > 0 : 
             return True
 
 
         cursor.close()
-
         return False
 
     def get_all_accounts(self):
@@ -92,3 +91,19 @@ class AccountService:
         cursor = self.util.execute_query_with_commit(update_balance_query)
 
         cursor.close()
+
+    def get_account_name_by_id(self, account_type_id):
+        account_name_query = self.root[26].text.format(account_type_id)
+
+        cursor = self.util.execute_query(account_name_query)
+
+        if cursor == None:
+            return None
+        
+        account_name_list = list(cursor)
+
+        if len(account_name_list) < 1:
+            return None
+
+        cursor.close()
+        return account_name_list[0][0]

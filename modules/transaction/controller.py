@@ -23,7 +23,25 @@ class TransactionController:
         print(txn_table)
 
     def get_user_txns(self):
-        user_accounts = self.account_service.get_user_accounts(self.user_info[3])
+        while True:
+            try:
+                aadhar = input('Enter the aadhar number of user : ')
+                print('Or enter 0 to exit')
+                if not aadhar.isdigit() : raise TypeError('Invalid input, please enter a number')
+                if int(aadhar) == 0:
+                    return 0
+                break
+            except TypeError as error:
+                print(str(error))
+        
+        aadhar = int(aadhar)
+        self.get_user_txns(aadhar)
+
+    def get_current_user_txns(self):
+        self.get_user_txns_handler(self.user_info[3])
+
+    def get_user_txns_handler(self, aadhar):
+        user_accounts = self.account_service.get_user_accounts(aadhar)
 
 
         user_account_list = [x[0] for x in user_accounts]
@@ -35,7 +53,6 @@ class TransactionController:
             user_txns_.insert(len(user_txns_), self.get_account_txns(user_account))
 
         user_txns = [item for sublist in user_txns_ for item in sublist]
-        print(user_txns)
         user_txns_table = PrettyTable()
         user_txns_table.field_names = ['Transaction id', 'Account number', 'amount', 'Transaction type']
         for txn in user_txns:
@@ -51,7 +68,6 @@ class TransactionController:
 
     def account_selection(self):
         user_accounts = self.account_service.get_user_accounts(self.user_info[3])
-        print(user_accounts)
         user_account_list = [x[0] for x in user_accounts]
         user_accounts_table = PrettyTable()
         user_accounts_table.field_names = ['Account number', 'balance', 'name']
@@ -75,12 +91,17 @@ class TransactionController:
             except TypeError as error:
                 print(str(error))
         
-        return int(choice)
+        selected_account_balance = 0
+        for account in user_accounts:
+            if account[0] == int(choice):
+                selected_account_balance = account[1]
+
+        return (int(choice), selected_account_balance)
 
 
     def withdraw(self):
 
-        account_num = self.account_selection()
+        (account_num, account_bal) = self.account_selection()
         account_info = self.account_service.get_account_info(account_num)
         max_withdrawal_amount = account_info[7]
         min_balance = account_info[8]
@@ -92,8 +113,12 @@ class TransactionController:
             return
         while True:
             try:
-                withdrawal_amount_choice = input('Enter the amount you want to withdraw : ')
+                print('Enter the amount you want to withdraw : ')
+                print('Or enter 0 to exit')
+                withdrawal_amount_choice = input()
                 if not withdrawal_amount_choice.isdigit() : raise TypeError('Invalid input, please enter a number')
+                if int(withdrawal_amount_choice) == 0:
+                    return
             except TypeError as error:
                 print(str(error))
 
@@ -117,11 +142,35 @@ class TransactionController:
 
         updated_balance = account_balance - withdrawal_amount
         try:
-            self.transaction_service.create_txn(updated_balance, account_num, 'withdrawal')
-            self.account_service.update_balance(withdrawal_amount, account_num)
+            self.transaction_service.create_txn(withdrawal_amount, account_num, 'withdrawal')
+            self.account_service.update_balance(updated_balance, account_num)
         except:
             pass
 
         print('Withdrawal is successful')
-    def deposit():
-        pass
+    
+    
+    def deposit(self):
+
+        (account_num, account_balance) = self.account_selection()
+        while True:
+            try:
+                deposit_amount_choice = input('Enter the amount you want to deposit : ')
+                if not deposit_amount_choice.isdigit() : raise TypeError('Invalid input, please enter a valid amount')
+                if int(deposit_amount_choice) < 0:
+                    print('Please enter a positive amount for deposit')
+                    continue
+                break
+            except TypeError as error:
+                print(str(error))
+
+        deposit_amount = int(deposit_amount_choice)
+        
+        updated_balance = account_balance + deposit_amount
+        try:
+            self.transaction_service.create_txn(deposit_amount, account_num, 'deposit')
+            self.account_service.update_balance(updated_balance, account_num)
+        except:
+            pass
+
+        print('Deposit is successful')

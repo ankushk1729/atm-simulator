@@ -11,7 +11,7 @@
     <GET_ROLE_FROM_ROLE_ID>select role_name from role where id = {};</GET_ROLE_FROM_ROLE_ID>
     <GET_ALL_USERS>select id, full_name, aadhar, email, phone from users;</GET_ALL_USERS>
     <CHECK_USER_EXISTS>select aadhar, id from users where {} = {};</CHECK_USER_EXISTS>
-    <CREATE_USER_ACCOUNT>insert into account(account_type, user_aadhar) values ({}, '{}');</CREATE_USER_ACCOUNT>
+    <CREATE_USER_ACCOUNT>insert into account(account_type, user_aadhar, balance) values ({}, {}, {});</CREATE_USER_ACCOUNT>
     <GET_ACCOUNT_ID_FROM_NAME>select id from account_type where name = '{}';</GET_ACCOUNT_ID_FROM_NAME>
     <GET_PENDING_APPROVALS>select id, user_aadhar, account_type from approval_requests where status = 0;</GET_PENDING_APPROVALS>
     <CREATE_APPROVAL_REQUEST>insert into approval_requests(user_aadhar, account_type) values({}, {});</CREATE_APPROVAL_REQUEST>
@@ -25,4 +25,5 @@
     <GET_ACCOUNT_INFO>select account.*, account_type.max_withdrawal_amount, account_type.min_balance, account_type.name from account inner join account_type on account.account_type = account_type.id where account_num = {};</GET_ACCOUNT_INFO>
     <CREATE_TXN>insert into transaction(amount, account_num, txn_type) values({}, {}, {});</CREATE_TXN>
     <GET_TXN_ID_FROM_NAME>select id from transaction_type where name = '{}';</GET_TXN_ID_FROM_NAME>
+    <GET_ACCOUNT_NAME_FROM_ID>select name from account_type where id = {};</GET_ACCOUNT_NAME_FROM_ID>
 </queries>

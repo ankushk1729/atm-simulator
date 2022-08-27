@@ -12,7 +12,7 @@ class AccountController:
     def create_account_handler(self):
         while True:
             try:
-                aadhar = input('Please enter the aadhar number of registered user')
+                aadhar = input('Please enter the aadhar number of registered user : ')
                 if not aadhar.isdigit() : raise TypeError('Invalid input, please enter a number')
                 break
             except ValueError as error:
@@ -21,15 +21,19 @@ class AccountController:
                 print(str(error))
 
         account_type_id = self.get_account_selection()
+        account_name = self.account_service.get_account_name_by_id(account_type_id)
         if self.account_service.check_acc_type_exists_for_user(aadhar, account_type_id):
             print('This account type already exists for this user')
             return
-        self.account_service.create_account(aadhar, account_type_id)
+        self.create_account(aadhar, account_type_id, account_name)
 
-    def create_account(self, user_aadhar, account_type_id):
-        
-        # account_type_id = self.get_account_selection()
-        self.account_service.create_account(user_aadhar, account_type_id)
+    def create_account(self, user_aadhar, account_type_id, account_name):
+        initial_balance = 0
+        if account_name == 'savings':
+            initial_balance = 5000
+        else: initial_balance = 10000
+
+        self.account_service.create_account(user_aadhar, account_type_id, initial_balance)
 
     def get_account_selection(self):
         name_to_key_mapping = {1: 'savings', 2: 'current'}

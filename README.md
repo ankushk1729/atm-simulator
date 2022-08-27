@@ -5,8 +5,6 @@
 -approve user
 - create new account
 
-
-
 ## Tasks completed 
 - User signup and login
 - Add to user_role mapping
@@ -17,15 +15,17 @@
 - Get all txns
 - Get all users
 - Get all accounts
-- Get account transactions
 - Get account info
 - Check user approved
 - Withdraw
+- Deposit
+- Get user transactions
+- On approval and account creation minimum balance is added acc to account requested
 - Get user transactions
 ## Pending remember
 - Mask password
-- Transactions - Partial
 - Delete user
+- Add try catch in services too
 
 
 ## User account information  

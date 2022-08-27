@@ -42,7 +42,7 @@ class UserMenu:
                 case 1:
                     self.account_controller.get_balance()
                 case 2:
-                    self.transaction_controller.get_user_txns()
+                    self.transaction_controller.get_current_user_txns()
                 case 3:
                     self.transaction_controller.withdraw()
                 case 4:

@@ -11,6 +11,7 @@ class UserController:
         self.user_service = UserService()
         self.auth_controller = auth_controller
         self.account_controller = AccountController(user_info)
+        self.account_service = AccountService(user_info)
         self.user_info = user_info
     
     
@@ -24,7 +25,7 @@ class UserController:
             for i, val in enumerate(pending_users):
                 print('{} aadhar - {}, id - {}'.format(i+1, val[1], val[0]))
             try:
-                print('Select the user name from given list : ')
+                print('Select the user from given list : ')
                 choice = input()
                 if not choice.isdigit() : raise TypeError('Invalid input, please enter a number')
                 if int(choice) == 0:
@@ -39,9 +40,11 @@ class UserController:
 
         choice = int(choice)
         requested_user = pending_users[choice - 1]
+        account_name = self.account_service.get_account_name_by_id(requested_user[2])
+
         self.user_service.approve_user('aadhar', requested_user[1])
 
-        self.account_controller.create_account(requested_user[1], requested_user[2])
+        self.account_controller.create_account(requested_user[1], requested_user[2], account_name)
 
         self.user_service.mark_request_as_approved(requested_user[0])
 
