@@ -55,5 +55,3 @@ class TransactionService:
 
         cursor.close()
 
-
-

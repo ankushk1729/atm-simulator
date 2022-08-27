@@ -30,7 +30,24 @@ class TransactionController:
 
         user_account_nums = tuple(user_account_list)
 
+        user_txns_ = []
+        for user_account in user_account_nums:
+            user_txns_.insert(len(user_txns_), self.get_account_txns(user_account))
+
+        user_txns = [item for sublist in user_txns_ for item in sublist]
+        print(user_txns)
+        user_txns_table = PrettyTable()
+        user_txns_table.field_names = ['Transaction id', 'Account number', 'amount', 'Transaction type']
+        for txn in user_txns:
+            if len(txn) == 0 : continue
+            user_txns_table.add_row((txn[0], txn[3], txn[2], txn[5]))
+
+        print('\nHere are your transactions')
+        print(user_txns_table)
         
+    def get_account_txns(self, account_num):
+        account_txns = self.transaction_service.get_account_transactions(account_num)
+        return account_txns
 
     def account_selection(self):
         user_accounts = self.account_service.get_user_accounts(self.user_info[3])
@@ -59,6 +76,7 @@ class TransactionController:
                 print(str(error))
         
         return int(choice)
+
 
     def withdraw(self):
 

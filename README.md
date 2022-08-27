@@ -21,9 +21,11 @@
 - Get account info
 - Check user approved
 - Withdraw
+- Get user transactions
 ## Pending remember
 - Mask password
 - Transactions - Partial
+- Delete user
 
 
 ## User account information  
