@@ -44,7 +44,7 @@ class UserMenu:
                 case 2:
                     self.transaction_controller.get_user_txns()
                 case 3:
-                    self.user_controller.withdraw()
+                    self.transaction_controller.withdraw()
                 case 4:
-                    self.user_controller.deposit()
+                    self.transaction_controller.deposit()
 

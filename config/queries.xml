@@ -15,12 +15,14 @@
     <GET_ACCOUNT_ID_FROM_NAME>select id from account_type where name = '{}';</GET_ACCOUNT_ID_FROM_NAME>
     <GET_PENDING_APPROVALS>select id, user_aadhar, account_type from approval_requests where status = 0;</GET_PENDING_APPROVALS>
     <CREATE_APPROVAL_REQUEST>insert into approval_requests(user_aadhar, account_type) values({}, {});</CREATE_APPROVAL_REQUEST>
-    <GET_USER_ACCOUNTS>select * from account where user_aadhar = '{}';</GET_USER_ACCOUNTS>
+    <GET_USER_ACCOUNTS>select account.*, account_type.name from account inner join account_type on account.account_type = account_type.id where user_aadhar = {};</GET_USER_ACCOUNTS>
     <CHECK_ACC_TYPE_EXISTS_FOR_USER>select * from account where user_aadhar = {} and account_type = {};</CHECK_ACC_TYPE_EXISTS_FOR_USER>
     <MARK_REQUEST_AS_APPROVED>update approval_requests set status = 1 where id = {};</MARK_REQUEST_AS_APPROVED>
     <GET_ALL_TXNS>select transaction.*, transaction_type.name from transaction inner join transaction_type on transaction.txn_type = transaction_type.id;</GET_ALL_TXNS>
     <GET_ALL_ACCOUNTS>select account.*, account_type.name from account inner join account_type on account.account_type = account_type.id;</GET_ALL_ACCOUNTS>
     <GET_ACCOUNT_TRANSACTIONS>select transaction.*, transaction_type.name from transaction inner join transaction_type on transaction.txn_type = transaction_type.id where account_num = {};</GET_ACCOUNT_TRANSACTIONS>
     <UPDATE_BALANCE>update account set balance = {} where account_num = {};</UPDATE_BALANCE>
-    <GET_ACCOUNT_INFO>select account.*, account_type.max_withdrawal_amount, account_type.min_balance from account inner join account_type on account.account_type = account_type.id where account_num = {};</GET_ACCOUNT_INFO>
+    <GET_ACCOUNT_INFO>select account.*, account_type.max_withdrawal_amount, account_type.min_balance, account_type.name from account inner join account_type on account.account_type = account_type.id where account_num = {};</GET_ACCOUNT_INFO>
+    <CREATE_TXN>insert into transaction(amount, account_num, txn_type) values({}, {}, {});</CREATE_TXN>
+    <GET_TXN_ID_FROM_NAME>select id from transaction_type where name = '{}';</GET_TXN_ID_FROM_NAME>
 </queries>

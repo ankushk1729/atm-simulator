@@ -1,3 +1,4 @@
+
 from utils.util import Util
 
 
@@ -5,7 +6,7 @@ class TransactionService:
     def __init__(self) :
         self.util = Util()
         self.root = self.util.get_query_root()
-        
+
     def get_all_txns(self):
         get_txns_query = self.root[19].text
 
@@ -31,7 +32,28 @@ class TransactionService:
 
         return txn_list
 
+    def get_txn_id_from_name(self, name):
+        get_txn_id_query = self.root[25].text.format(name)
+        cursor = self.util.execute_query(get_txn_id_query)
+        if cursor == None:
+            return None
 
-    def create_txn(self, amount, balance):
-        pass
+        txn_list = list(cursor)
+        if len(txn_list) < 1: return None
+        txn = txn_list[0][0]
+        cursor.close()
+        return txn
+
+    def create_txn(self, balance, account_num, txn_name):
+        txn_type = self.get_txn_id_from_name(txn_name)
+        if txn_type == None:
+            print('Unable to perform the transaction')
+            return
+        
+        create_txn_query = self.root[24].text.format(balance, account_num, txn_type)
+        cursor = self.util.execute_query_with_commit(create_txn_query)
+
+        cursor.close()
+
+
 

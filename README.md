@@ -20,9 +20,10 @@
 - Get account transactions
 - Get account info
 - Check user approved
+- Withdraw
 ## Pending remember
 - Mask password
-- Transactions
+- Transactions - Partial
 
 
 ## User account information  

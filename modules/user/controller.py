@@ -101,7 +101,6 @@ class UserController:
     def check_user_approved(self):
 
         user_data = self.user_service.get_user(self.user_info[3])
-        print(user_data)
         if user_data[5] == 1:
             return True
     

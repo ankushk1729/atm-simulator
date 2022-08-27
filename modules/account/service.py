@@ -75,11 +75,11 @@ class AccountService:
 
         cursor = self.util.execute_query(account_info_query)
 
-        if cursor == None or len(list(cursor)) < 1:
-            return ()
+        if cursor == None:
+            return None
 
-        account_info = list(cursor)[0]
-
+        account_info_list = list(cursor)
+        account_info = account_info_list[0]
         cursor.close()
 
         return account_info
