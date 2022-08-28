@@ -23,7 +23,7 @@ class AccountController:
         aadhar = int(aadhar)
 
         if not self.user_service.check_user_exists('aadhar', aadhar):
-            print('No user with aadhar {}'.format(aadhar))
+            print('\n----- No user with aadhar {} ----- \n'.format(aadhar))
             return
         
         if not self.user_service.check_user_approved(aadhar):
@@ -33,7 +33,7 @@ class AccountController:
         account_type_id = self.get_account_selection()
         account_name = self.account_service.get_account_name_by_id(account_type_id)
         if self.account_service.check_acc_type_exists_for_user(aadhar, account_type_id):
-            print('This account type already exists for this user')
+            print('\n-----  This account type already exists for this user ----- \n')
             return
         self.create_account(aadhar, account_type_id, account_name)
 
@@ -76,7 +76,7 @@ class AccountController:
         for account in user_accounts:
             user_accounts_table.add_row((account[0],account[1]))
 
-        print('\nHere are all the accounts')
+        print('\n----- Here are all your accounts -----\n')
         print(user_accounts_table)
 
 
@@ -89,5 +89,5 @@ class AccountController:
         for account in all_accounts:
             all_accounts_table.add_row((account[0],account[1], account[3], account[7]))
 
-        print('\nHere are all the accounts')
+        print('\n----- Here are all the accounts -----\n')
         print(all_accounts_table)

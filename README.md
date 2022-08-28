@@ -23,10 +23,9 @@
 - On approval and account creation minimum balance is added acc to account requested
 - Get user transactions
 - Delete user
-## Pending remember
-- Mask password
-- Add try catch in services too
 - Show user age
+## Pending remember
+- Add try catch in services too
 
 
 ## User account information  

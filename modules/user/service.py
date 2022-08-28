@@ -102,3 +102,10 @@ class UserService:
             return True
     
         return False
+
+    def delete_user(self, aadhar):
+        delete_user_query = self.root[27].text.format(aadhar)
+
+        cursor = self.util.execute_query_with_commit(delete_user_query)
+        cursor.close()
+

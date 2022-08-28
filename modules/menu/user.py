@@ -12,7 +12,7 @@ class UserMenu:
         self.transaction_controller = TransactionController(user_info)
         if self.user_controller.check_user_approved() :
             self.show_options()
-        else : print('You are not yet approved by admin, please try again later')
+        else : print('\n----- You are not yet approved by admin, please try again later -----\n')
 
     def show_options(self):
 

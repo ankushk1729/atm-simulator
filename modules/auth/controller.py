@@ -3,6 +3,7 @@ from modules.account.service import AccountService
 from modules.auth.service import AuthService
 from modules.user.schema import SchemaError, user_signup_schema
 from modules.user.service import UserService
+from schema import Schema, SchemaError
 from utils.util import Util
 
 
@@ -32,10 +33,14 @@ class AuthController:
             aadhar = input('Enter your aadhar number : ')
             try:
                 if not aadhar.isdigit() : raise TypeError('Invalid input, please enter a number')
+                Schema(lambda n : len(str(n)) == 12, error = 'Aadhar should be of 12 digits').validate(aadhar)
             except TypeError as error:
                 print(str(error))
                 continue
-
+            except SchemaError as error:
+                print(str(error))
+                continue
+            
             if self.user_service.check_user_exists('aadhar', aadhar):
                 print('User with this aadhar already exists')
             else :

@@ -152,7 +152,7 @@ class TransactionController:
         except:
             pass
 
-        print('Withdrawal is successful')
+        print('\n----- Withdrawal is successful -----\n')
     
     
     def deposit(self):
@@ -178,4 +178,4 @@ class TransactionController:
         except:
             pass
 
-        print('Deposit is successful')
+        print('\n----- Deposit is successful -----\n')
