@@ -22,28 +22,37 @@ class AccountController:
                 print(str(error))
         aadhar = int(aadhar)
 
-        if not self.user_service.check_user_exists('aadhar', aadhar):
-            print('\n----- No user with aadhar {} ----- \n'.format(aadhar))
-            return
-        
-        if not self.user_service.check_user_approved(aadhar):
-            print('\nUser is not approved yet\n')
-            return
+        try:
+            if not self.user_service.check_user_exists('aadhar', aadhar):
+                print('\n----- No user with aadhar {} ----- \n'.format(aadhar))
+                return
+            
+            if not self.user_service.check_user_approved(aadhar):
+                print('\nUser is not approved yet\n')
+                return
 
-        account_type_id = self.get_account_selection()
-        account_name = self.account_service.get_account_name_by_id(account_type_id)
-        if self.account_service.check_acc_type_exists_for_user(aadhar, account_type_id):
-            print('\n-----  This account type already exists for this user ----- \n')
-            return
-        self.create_account(aadhar, account_type_id, account_name)
+            account_type_id = self.get_account_selection()
+            account_name = self.account_service.get_account_name_by_id(account_type_id)
+            if self.account_service.check_acc_type_exists_for_user(aadhar, account_type_id):
+                print('\n-----  This account type already exists for this user ----- \n')
+                return
+            self.create_account(aadhar, account_type_id, account_name)
+            print('Successfully created the account')
+        except : 
+            print('Unable to create account')
+
 
     def create_account(self, user_aadhar, account_type_id, account_name):
-        initial_balance = 0
-        if account_name == 'savings':
-            initial_balance = 5000
-        else: initial_balance = 10000
+        try:
+            initial_balance = 0
+            if account_name == 'savings':
+                initial_balance = 5000
+            else: initial_balance = 10000
 
-        self.account_service.create_account(user_aadhar, account_type_id, initial_balance)
+            self.account_service.create_account(user_aadhar, account_type_id, initial_balance)
+
+        except :
+            print('Unable to create account')
 
     def get_account_selection(self):
         name_to_key_mapping = {1: 'savings', 2: 'current'}
@@ -63,31 +72,40 @@ class AccountController:
                 print(str(error))
             except TypeError as error:
                 print(str(error))
-            
-        account_type_id = self.account_service.get_account_type_id_by_name(name_to_key_mapping[int(choice)])
-        return account_type_id
+
+        try:    
+            account_type_id = self.account_service.get_account_type_id_by_name(name_to_key_mapping[int(choice)])
+            return account_type_id
+
+        except : 
+            return None
 
     def get_balance(self):
 
-        user_accounts = self.account_service.get_user_accounts(self.user_info[3])
-        
-        user_accounts_table = PrettyTable()
-        user_accounts_table.field_names = ['Account number', 'balance']
-        for account in user_accounts:
-            user_accounts_table.add_row((account[0],account[1]))
+        try:
+            user_accounts = self.account_service.get_user_accounts(self.user_info[3])
+            
+            user_accounts_table = PrettyTable()
+            user_accounts_table.field_names = ['Account number', 'balance']
+            for account in user_accounts:
+                user_accounts_table.add_row((account[0],account[1]))
 
-        print('\n----- Here are all your accounts -----\n')
-        print(user_accounts_table)
+            print('\n----- Here are all your accounts -----\n')
+            print(user_accounts_table)
 
-
+        except :
+            print('Unable to fetch balance')
 
     def get_all_accounts(self):
-        all_accounts = self.account_service.get_all_accounts()
+        try:
+            all_accounts = self.account_service.get_all_accounts()
 
-        all_accounts_table = PrettyTable()
-        all_accounts_table.field_names = ['Account number', 'balance', "User's aadhar", 'name']
-        for account in all_accounts:
-            all_accounts_table.add_row((account[0],account[1], account[3], account[7]))
+            all_accounts_table = PrettyTable()
+            all_accounts_table.field_names = ['Account number', 'balance', "User's aadhar", 'name']
+            for account in all_accounts:
+                all_accounts_table.add_row((account[0],account[1], account[3], account[7]))
 
-        print('\n----- Here are all the accounts -----\n')
-        print(all_accounts_table)
+            print('\n----- Here are all the accounts -----\n')
+            print(all_accounts_table)
+        except : 
+            print('Unable to fetch all the users')

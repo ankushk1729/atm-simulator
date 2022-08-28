@@ -24,11 +24,8 @@ class UserController:
             pending_users = self.show_pending_users()
             if len(pending_users) < 1: return
             while True:
-
-                for i, val in enumerate(pending_users):
-                    print('{} aadhar - {}, id - {}'.format(i+1, val[1], val[0]))
                 try:
-                    print('Select the user from given list : ')
+                    print('Select the user by S.no : ')
                     choice = input()
                     if not choice.isdigit() : raise TypeError('Invalid input, please enter a number')
                     if int(choice) == 0:
@@ -108,9 +105,9 @@ class UserController:
             print('Pending user approvals : ')
             pending_users = self.user_service.get_pending_users()
             pending_users_table = PrettyTable()
-            pending_users_table.field_names = ['data id', 'aadhar']
-            for user in pending_users:
-                pending_users_table.add_row((user[0], user[1]))
+            pending_users_table.field_names = ['S.no', 'Request id', 'aadhar']
+            for ind, user in enumerate(pending_users):
+                pending_users_table.add_row((ind + 1, user[0], user[1]))
 
             print(pending_users_table)
 

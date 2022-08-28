@@ -16,12 +16,13 @@ class AdminMenu:
         self.show_options()
 
     def show_options(self):
-
         while True:
+            print('****************************************************')
             for i in range(0, len(admin_operations)):
                 operation_text = admin_tasks_to_function_mapping[admin_operations[i]]
                 print('Select {} to {}'.format(i + 1, operation_text))
             print('Select 0 to exit')
+            print('****************************************************')
 
             try:
                 choice = input()
