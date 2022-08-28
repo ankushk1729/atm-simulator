@@ -13,8 +13,8 @@ def test_login_output():
 
 def test_get_user():
     user_service = UserService()
-    aadhar = 45
-    expected_name = 'dino'
+    aadhar = 696969696969
+    expected_name = 'nice'
     user_info = user_service.get_user(aadhar)
 
     assert len(user_info) == 11
