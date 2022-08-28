@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS user_role (
     role_id INT NOT NULL,
     user_id VARCHAR(70) NOT NULL,
     FOREIGN KEY (role_id) REFERENCES role(id),
-    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS approval_requests (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     approved_at TIMESTAMP DEFAULT NULL,
     FOREIGN KEY (account_type) REFERENCES account_type(id),
-    FOREIGN KEY (user_aadhar) REFERENCES users(aadhar),
+    FOREIGN KEY (user_aadhar) REFERENCES users(aadhar) ON DELETE CASCADE,
     FOREIGN KEY (approved_by) REFERENCES users(id),
     status INT DEFAULT 0
 );

@@ -6,7 +6,7 @@ from prettytable import PrettyTable
 class AccountController:
     def __init__(self, user_info):
         self.user_info = user_info
-        self.account_service = AccountService(user_info)
+        self.account_service = AccountService()
         self.user_service = UserService()
 
 
@@ -25,6 +25,11 @@ class AccountController:
         if not self.user_service.check_user_exists('aadhar', aadhar):
             print('No user with aadhar {}'.format(aadhar))
             return
+        
+        if not self.user_service.check_user_approved(aadhar):
+            print('\nUser is not approved yet\n')
+            return
+
         account_type_id = self.get_account_selection()
         account_name = self.account_service.get_account_name_by_id(account_type_id)
         if self.account_service.check_acc_type_exists_for_user(aadhar, account_type_id):

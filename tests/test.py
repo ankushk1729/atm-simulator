@@ -21,14 +21,9 @@ def test_get_user():
     assert user_info[1] == 'nice'
 
 
-def get_account_name(account_id):
+def test_get_account_name_from_id():
+
     account_service = AccountService()
-    return account_service.get_account_name_by_id(account_id)
+    account_name = account_service.get_account_name_by_id(1)
 
-
-def test_get_account_name_from_id(mocker):
-    func = mocker.patch('modules.account.service.AccountService.get_account_name_by_id', return_value = 'savings')
-
-    result = func(1)
-
-    assert get_account_name(1) == 'savings'
+    assert account_name == 'savings'

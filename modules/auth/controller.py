@@ -22,12 +22,9 @@ class AuthController:
             if  user_info :
                 break
             else : print('Invalid credentials')
-        print(user_info)
         return user_info
 
     def signup(self):
-
-        user_service  = UserService()
         is_user_exists = True
         aadhar = 0
         while is_user_exists:
@@ -38,7 +35,7 @@ class AuthController:
                 print(str(error))
                 continue
 
-            if user_service.check_user_exists('aadhar', aadhar):
+            if self.user_service.check_user_exists('aadhar', aadhar):
                 print('User with this aadhar already exists')
             else :
                 is_user_exists = False
@@ -84,7 +81,7 @@ class AuthController:
             except TypeError as error:
                 print(str(error))
         
-        account_service = AccountService(schema)
+        account_service = AccountService()
         account_type_id = account_service.get_account_type_id_by_name(name_to_key_mapping[int(choice)])
         self.create_approval_request(aadhar, account_type_id)
 

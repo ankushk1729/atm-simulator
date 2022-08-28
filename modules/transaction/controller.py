@@ -10,7 +10,7 @@ class TransactionController:
     def __init__(self, user_info):
         self.user_info = user_info
         self.transaction_service = TransactionService()
-        self.account_service = AccountService(user_info)
+        self.account_service = AccountService()
         self.user_service = UserService()
 
 

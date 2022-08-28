@@ -11,7 +11,7 @@ class UserController:
         self.user_service = UserService()
         self.auth_controller = auth_controller
         self.account_controller = AccountController(user_info)
-        self.account_service = AccountService(user_info)
+        self.account_service = AccountService()
         self.user_info = user_info
     
     

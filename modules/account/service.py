@@ -3,8 +3,7 @@ from utils.util import Util
 
 class AccountService:
     
-    def __init__(self, user_info):
-        self.user_info = user_info
+    def __init__(self):
         self.util = Util()
         self.root = self.util.get_query_root()
 

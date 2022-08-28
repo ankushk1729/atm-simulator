@@ -95,3 +95,10 @@ class UserService:
         cursor = self.util.execute_query_with_commit(create_approval_request_query)
 
         cursor.close()
+
+    def check_user_approved(self, aadhar):
+        user_data = self.get_user(aadhar)
+        if user_data[5] == 1:
+            return True
+    
+        return False
