@@ -3,6 +3,7 @@ import pyfiglet
 from modules.auth.controller import AuthController
 from modules.menu.admin import AdminMenu
 from modules.menu.user import UserMenu
+from utils.connect import connection_obj
 from utils.util import Util
 
 
@@ -13,8 +14,8 @@ class Main():
         self.handler()
 
     def handler(self):
-        project_title = pyfiglet.figlet_format('ATM SIMULATOR')
-        print(project_title)
+        welcome_msg = pyfiglet.figlet_format('ATM SIMULATOR')
+        print(welcome_msg)
         while True:
             print('Enter 1 to Sign up')
             print('Enter 2 to Sign in')
@@ -42,7 +43,11 @@ class Main():
                     else :
                         UserMenu(user_info)
                 case 0:
+                    connection_obj.cnx.close()
+                    goodbye_msg = pyfiglet.figlet_format('THANK YOU FOR VISITING!')
+                    print(goodbye_msg)
                     exit() 
+
 
 main = Main()
 
