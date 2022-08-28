@@ -48,10 +48,10 @@ class AuthController:
 
         while not is_signup_schema_correct:
             try: 
-                full_name = input('Enter your full name :')
+                full_name = input('Enter your full name : ')
                 email = input('Enter your email : ')
                 password = input('Enter your password : ')
-                phone = int(input('Enter your phone : '))
+                phone = input('Enter your phone : ')
                 DOB = input('Enter your DOB in format DD-MM-YY : ')
                 schema = {'full_name' : full_name, 'email' : email, 'phone': phone, 'aadhar': aadhar, 'password' : password, 'DOB': DOB}
                 user_signup_schema.validate(schema)

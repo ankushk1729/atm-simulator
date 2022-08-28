@@ -1,6 +1,7 @@
 
 from modules.account.service import AccountService
 from modules.transaction.service import TransactionService
+from modules.user.service import UserService
 from prettytable import PrettyTable
 
 
@@ -10,6 +11,7 @@ class TransactionController:
         self.user_info = user_info
         self.transaction_service = TransactionService()
         self.account_service = AccountService(user_info)
+        self.user_service = UserService()
 
 
     def get_all_txns(self):
@@ -35,7 +37,10 @@ class TransactionController:
                 print(str(error))
         
         aadhar = int(aadhar)
-        self.get_user_txns(aadhar)
+        if not self.user_service.check_user_exists('aadhar', aadhar):
+            print('No user with aadhar {}'.format(aadhar))
+            return
+        self.get_user_txns_handler(aadhar)
 
     def get_current_user_txns(self):
         self.get_user_txns_handler(self.user_info[3])

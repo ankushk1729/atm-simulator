@@ -1,3 +1,5 @@
+import pyfiglet
+
 from modules.auth.controller import AuthController
 from modules.menu.admin import AdminMenu
 from modules.menu.user import UserMenu
@@ -11,6 +13,8 @@ class Main():
         self.handler()
 
     def handler(self):
+        project_title = pyfiglet.figlet_format('ATM SIMULATOR')
+        print(project_title)
         while True:
             print('Enter 1 to Sign up')
             print('Enter 2 to Sign in')

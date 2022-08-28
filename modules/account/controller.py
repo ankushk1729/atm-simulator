@@ -6,7 +6,6 @@ from prettytable import PrettyTable
 class AccountController:
     def __init__(self, user_info):
         self.user_info = user_info
-        # self.account_num = account_num
         self.account_service = AccountService(user_info)
         self.user_service = UserService()
 
