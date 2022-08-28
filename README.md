@@ -1,10 +1,5 @@
 # ATM Simulator to Deposit and withdrawal amount 
 
-## Admin ops
-- search user
--approve user
-- create new account
-
 ## Tasks completed 
 - User signup and login
 - Add to user_role mapping
@@ -24,8 +19,12 @@
 - Get user transactions
 - Delete user
 - Show user age
-## Pending remember
-- Add try catch in services too
+
+## Admin ops
+- search user
+-approve user
+- create new account
+
 
 
 ## User account information  
