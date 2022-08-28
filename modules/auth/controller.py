@@ -1,3 +1,4 @@
+import maskpass
 from modules.account.service import AccountService
 from modules.auth.service import AuthService
 from modules.user.schema import SchemaError, user_signup_schema
@@ -17,7 +18,7 @@ class AuthController:
         
         while True:
             email = input('Enter your email : ')
-            password = input('Enter your password : ')
+            password = maskpass.askpass('Enter your password : ')
             user_info = auth_service.login(email, password)
             if  user_info :
                 break
@@ -47,7 +48,7 @@ class AuthController:
             try: 
                 full_name = input('Enter your full name : ')
                 email = input('Enter your email : ')
-                password = input('Enter your password : ')
+                password = maskpass.askpass('Enter password : ')
                 phone = input('Enter your phone : ')
                 DOB = input('Enter your DOB in format DD-MM-YY : ')
                 schema = {'full_name' : full_name, 'email' : email, 'phone': phone, 'aadhar': aadhar, 'password' : password, 'DOB': DOB}

@@ -22,9 +22,9 @@
 - Get user transactions
 - On approval and account creation minimum balance is added acc to account requested
 - Get user transactions
+- Delete user
 ## Pending remember
 - Mask password
-- Delete user
 - Add try catch in services too
 - Show user age
 
