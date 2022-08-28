@@ -109,6 +109,20 @@ class UserController:
     
         return False
 
-    def delete_user():
-        pass
+    def delete_user(self):
+        while True:
+
+            try:
+                print('Enter the aadhar number to delete the user : ')
+                aadhar_choice = input()
+                if not aadhar_choice.isdigit() : raise TypeError('Invalid input, please enter a number')
+                if int(aadhar_choice) == 0:
+                    return 0
+
+                break
+            except ValueError as error:
+                print(str(error))
+            except TypeError as error:
+                print(str(error))
+
 

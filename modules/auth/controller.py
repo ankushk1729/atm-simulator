@@ -22,7 +22,7 @@ class AuthController:
             if  user_info :
                 break
             else : print('Invalid credentials')
-
+        print(user_info)
         return user_info
 
     def signup(self):

@@ -48,8 +48,8 @@ CREATE TABLE IF NOT EXISTS account (
     balance INT DEFAULT 0,
     account_type INT,
     user_aadhar BIGINT,
-    FOREIGN KEY (account_type) REFERENCES account_type(id),
-    FOREIGN KEY (user_aadhar) REFERENCES users(aadhar),
+    FOREIGN KEY (account_type) REFERENCES account_type(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_aadhar) REFERENCES users(aadhar) ON DELETE CASCADE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     modified_by VARCHAR(70),
@@ -73,8 +73,8 @@ CREATE TABLE IF NOT EXISTS transaction(
     amount  INT,
     account_num  INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY(txn_type) REFERENCES  transaction_type(id),
-    FOREIGN KEY(account_num) REFERENCES  account(account_num)
+    FOREIGN KEY(txn_type) REFERENCES  transaction_type(id) ON DELETE CASCADE,
+    FOREIGN KEY(account_num) REFERENCES  account(account_num) ON DELETE CASCADE
     );
 
 CREATE TABLE IF NOT EXISTS transaction_type (
