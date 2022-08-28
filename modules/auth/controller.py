@@ -50,7 +50,7 @@ class AuthController:
                 email = input('Enter your email : ')
                 password = maskpass.askpass('Enter password : ')
                 phone = input('Enter your phone : ')
-                DOB = input('Enter your DOB in format DD-MM-YY : ')
+                DOB = input('Enter your DOB in format DD-MM-YYYY : ')
                 schema = {'full_name' : full_name, 'email' : email, 'phone': phone, 'aadhar': aadhar, 'password' : password, 'DOB': DOB}
                 user_signup_schema.validate(schema)
                 is_signup_schema_correct = True

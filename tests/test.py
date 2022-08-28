@@ -1,3 +1,5 @@
+# from unittest.mock import Mock
+
 from modules.account.service import AccountService
 from modules.auth.service import AuthService
 from modules.user.service import UserService
@@ -27,3 +29,5 @@ def test_get_account_name_from_id():
     account_name = account_service.get_account_name_by_id(1)
 
     assert account_name == 'savings'
+
+
