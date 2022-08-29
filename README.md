@@ -1,6 +1,6 @@
 # ATM Simulator to Deposit and withdrawal amount 
 
-## Tasks completed 
+## Functions
 - User signup and login
 - Add to user_role mapping
 - Approve user by id and aadhar
