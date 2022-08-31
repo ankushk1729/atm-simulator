@@ -27,4 +27,6 @@
     <GET_TXN_ID_FROM_NAME>select id from transaction_type where name = '{}';</GET_TXN_ID_FROM_NAME>
     <GET_ACCOUNT_NAME_FROM_ID>select name from account_type where id = {};</GET_ACCOUNT_NAME_FROM_ID>
     <DELETE_USER>delete from users where aadhar = {};</DELETE_USER>
+    <MARK_REQUEST_AS_APPROVED>update approval_requests set status = 1 where user_aadhar = {};</MARK_REQUEST_AS_APPROVED>
+    <GET_ADMINS_SP>'sp_getAdmins'</GET_ADMINS_SP>
 </queries>

@@ -21,7 +21,7 @@ class Util:
             cursor.execute(query)
             return cursor
         except:
-            print('Unable to perfrom the action')
+            print('Unable to perform the action')
             return None
 
     def execute_query_with_commit(self, query):
@@ -31,7 +31,18 @@ class Util:
             self.cnx.commit()
             return cursor
         except:
-            print('Unable to perfrom the action')
+            print('Unable to perform the action')
+            return None
+
+    def execute_stored_procedure(self, sp):
+        try:
+            print(sp)
+            cursor = self.cnx.cursor()
+            cursor.callproc('sp_getAdmins', [])
+            cursor.stored_results()
+            return cursor
+        except:
+            print('Unable to perform the action')
             return None
 
     def authorize_permissions(self, user_id, role):

@@ -30,7 +30,7 @@ class AdminMenu:
                 if int(choice) == 0:
                     break
 
-                if not (int(choice) >= 0 and int(choice) <= 9) : raise ValueError('Please enter a number between 0 and 9')
+                if not (int(choice) >= 0 and int(choice) <= 10) : raise ValueError('Please enter a number between 0 and 10')
             except ValueError as error:
                 print(str(error))
                 continue
@@ -59,5 +59,7 @@ class AdminMenu:
                     self.account_controller.get_all_accounts()
                 case 9:
                     self.transaction_controller.get_user_txns()
+                case 10:
+                    self.user_controller.get_all_admins()
                 case 0:
                     return

@@ -17,7 +17,6 @@ class UserService:
         return True
 
     def approve_user(self, unique_field_key, unique_field_value):
-        
         if unique_field_key == 'id':
             approve_user_query = self.root[4].text.format(unique_field_key, unique_field_value)
             cursor = self.util.execute_query_with_commit(approve_user_query)
@@ -34,8 +33,15 @@ class UserService:
         mark_req_as_approved = self.root[18].text.format(request_id)
 
         cursor = self.util.execute_query_with_commit(mark_req_as_approved)
+        cursor.close()
 
         
+    def mark_request_as_approved_with_aadhar(self, aadhar):
+        mark_req_as_approved = self.root[28].text.format(aadhar)
+
+        cursor = self.util.execute_query_with_commit(mark_req_as_approved)
+        cursor.close()
+
 
     def search_users(self, search_key, search_value):
 
@@ -109,3 +115,18 @@ class UserService:
         cursor = self.util.execute_query_with_commit(delete_user_query)
         cursor.close()
 
+    def get_all_admins(self):
+        get_all_admins_query = self.root[29].text
+
+        cursor = self.util.execute_stored_procedure(get_all_admins_query)
+
+        if cursor == None:
+            return []
+
+        admins_list = []
+        for data in cursor.stored_results():
+            admins_list = data.fetchall()
+
+        
+        cursor.close()
+        return admins_list

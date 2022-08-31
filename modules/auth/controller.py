@@ -1,4 +1,5 @@
 import maskpass
+from modules.account.controller import AccountController
 from modules.account.service import AccountService
 from modules.auth.service import AuthService
 from modules.user.schema import SchemaError, user_signup_schema
@@ -12,6 +13,7 @@ class AuthController:
     def __init__(self):
         self.util = Util()
         self.user_service = UserService()
+        self.account_controller = AccountController(())
         
 
     def login(self):
@@ -94,14 +96,16 @@ class AuthController:
             account_type_id = account_service.get_account_type_id_by_name(name_to_key_mapping[int(choice)])
             self.create_approval_request(aadhar, account_type_id)
             print('Successfull signup')
-            return (user_id, aadhar)
+            return (user_id, aadhar, account_type_id, name_to_key_mapping[int(choice)])
 
         except:
             print('Unable to create account')
 
     def create_user(self):
-        (user_id, aadhar) = self.signup()
-        self.user_service.approve_user('id', str(user_id))
+        (user_id, aadhar, account_type_id, account_name) = self.signup()
+        self.user_service.approve_user('aadhar', aadhar)
+        self.account_controller.create_account(aadhar, account_type_id, account_name)
+        self.user_service.mark_request_as_approved_with_aadhar(aadhar)
     
     def create_approval_request(self, user_aadhar, account_type):
         self.user_service.create_approval_req(user_aadhar, account_type)

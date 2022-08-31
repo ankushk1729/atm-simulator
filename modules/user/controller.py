@@ -161,3 +161,17 @@ class UserController:
             print('\n------- Successfully deleted the user and linked accounts -------\n')
         except:
             print('Unable to delete the user')
+
+    def get_all_admins(self):
+        try:
+            admins_list = self.user_service.get_all_admins()
+
+            admins_table = PrettyTable()
+            admins_table.field_names = ["Name", "Phone number", 'Created at']
+            for admin in admins_list:
+                admins_table.add_row(admin)
+
+            print('\n ----- Here are all the admins -----')
+            print(admins_table)
+        except: 
+            print('Unable to find all the admins')
