@@ -101,7 +101,7 @@ class AccountController:
             all_accounts = self.account_service.get_all_accounts()
 
             all_accounts_table = PrettyTable()
-            all_accounts_table.field_names = ['Account number', 'balance', "User's aadhar", 'name']
+            all_accounts_table.field_names = ['Account number', 'balance', "User's aadhar", 'Account type']
             for account in all_accounts:
                 all_accounts_table.add_row((account[0],account[1], account[3], account[7]))
 
