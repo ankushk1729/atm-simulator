@@ -1,3 +1,4 @@
+from unittest.mock import MagicMock
 from modules.account.service import AccountService
 from modules.auth.service import AuthService
 from modules.user.service import UserService
@@ -22,10 +23,18 @@ def test_get_user():
     assert user_info[1] == expected_name
 
 
+
+def mocked_get_account_type_id_by_name(account_type_name):
+    if account_type_name == 'savings':
+        return 1
+    return 2
+
+
 def test_get_account_name_from_id():
 
     account_service = AccountService()
-    account_type_id = 1
+
+    account_type_id = mocked_get_account_type_id_by_name('savings')
     expected_name = 'savings'
     account_name = account_service.get_account_name_by_id(account_type_id)
 
