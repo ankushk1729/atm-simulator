@@ -1,4 +1,3 @@
-from unittest.mock import MagicMock
 from modules.account.service import AccountService
 from modules.auth.service import AuthService
 from modules.user.service import UserService
