@@ -36,9 +36,8 @@ class Util:
 
     def execute_stored_procedure(self, sp):
         try:
-            print(sp)
             cursor = self.cnx.cursor()
-            cursor.callproc('sp_getAdmins', [])
+            cursor.callproc(sp, [])
             cursor.stored_results()
             return cursor
         except:
